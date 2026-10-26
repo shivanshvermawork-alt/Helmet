@@ -1,0 +1,4 @@
+# Build and temporary files
+*.tmp
+*.log
+install_git.ps1
