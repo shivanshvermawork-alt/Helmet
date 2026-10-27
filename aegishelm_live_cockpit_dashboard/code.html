@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><style>html{scroll-behavior:smooth;}@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed": "#00174b", "error-container": "#ffdad6", "tertiary-fixed": "#ffdada", "on-tertiary": "#ffffff", "surface-variant": "#dae2fd", "on-tertiary-fixed-variant": "#920028", "tertiary": "#ac0031", "surface-container-low": "#f2f3ff", "outline-variant": "#c3c6d7", "on-secondary-fixed": "#002114", "tertiary-fixed-dim": "#ffb3b6", "secondary-container": "#82f5c1", "tertiary-container": "#d71142", "primary-fixed": "#dbe1ff", "secondary": "#006c4a", "inverse-surface": "#283044", "on-tertiary-container": "#ffecec", "on-surface": "#131b2e", "on-background": "#131b2e", "inverse-primary": "#b4c5ff", "surface-container-lowest": "#ffffff", "on-primary-container": "#eeefff", "background": "#faf8ff", "secondary-fixed-dim": "#68dba9", "on-error": "#ffffff", "outline": "#737686", "on-secondary-fixed-variant": "#005137", "surface": "#faf8ff", "surface-dim": "#d2d9f4", "on-secondary-container": "#00714e", "primary-fixed-dim": "#b4c5ff", "inverse-on-surface": "#eef0ff", "primary": "#004ac6", "primary-container": "#2563eb", "surface-container-high": "#e2e7ff", "surface-container-highest": "#dae2fd", "on-secondary": "#ffffff", "secondary-fixed": "#85f8c4", "on-surface-variant": "#434655", "surface-container": "#eaedff", "surface-bright": "#faf8ff", "on-tertiary-fixed": "#40000c", "on-error-container": "#93000a", "on-primary": "#ffffff", "error": "#ba1a1a", "surface-tint": "#0053db", "on-primary-fixed-variant": "#003ea8" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-xl": "2.5rem", "space-md": "1rem", "space-sm": "0.5rem", "gutter-mobile": "1rem", "space-lg": "1.5rem", "margin": "2rem", "margin-mobile": "1rem", "gutter": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-md": [ "Space Grotesk" ], "body-sm": [ "Geist" ], "label-lg": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Space Grotesk" ], "headline-sm": [ "Space Grotesk" ], "body-lg": [ "Geist" ], "headline-lg": [ "Space Grotesk" ], "label-sm": [ "JetBrains Mono" ], "headline-lg-mobile": [ "Space Grotesk" ], "headline-xl": [ "Space Grotesk" ], "telemetry-unit": [ "JetBrains Mono" ], "body-md": [ "Geist" ], "label-md": [ "JetBrains Mono" ] }, "fontSize": { "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "label-lg": [ "14px", { "lineHeight": "20px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "headline-xl-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "fontWeight": "500" } ], "body-lg": [ "18px", { "lineHeight": "28px", "fontWeight": "400" } ], "headline-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "label-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500" } ], "headline-lg-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-xl": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "telemetry-unit": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.1em", "fontWeight": "700" } ], "body-md": [ "15px", { "lineHeight": "22px", "fontWeight": "400" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "500" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.06)] border-b border-surface-container-high/50"><div class="h-20 max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 flex items-center justify-between gap-4"><div class="flex items-center gap-3.5 shrink-0"><div class="w-11 h-11 rounded-2xl bg-primary-container flex items-center justify-center text-on-primary shadow-[0_0_24px_rgba(37,99,235,0.3)]"><span class="material-symbols-outlined text-[26px]">shield</span></div><div class="flex flex-col"><div class="flex items-center gap-2"><span class="font-headline-sm text-xl lg:text-2xl text-on-surface tracking-tight font-black">AegisHelm</span><span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-xs tracking-wider uppercase font-bold">Smart IoT · Safety Interlock</span></div><span class="font-label-sm text-xs text-outline tracking-wider uppercase font-semibold">Embedded Telemetry System</span></div></div><nav class="hidden lg:flex items-center p-1.5 bg-surface-container-low rounded-full gap-1.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold shadow-sm"><a aria-current="page" class="px-5 py-2.5 rounded-full transition-all bg-primary-container text-on-primary-container font-semibold text-sm shadow-sm cursor-pointer" data-path="live-cockpit" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">Live Cockpit</a><a class="px-5 py-2.5 rounded-full font-label-md text-sm text-on-surface-variant hover:text-on-surface transition-all cursor-pointer font-medium" data-path="motion-impact" onclick="document.getElementById('section-motion').scrollIntoView({ behavior: 'smooth', block: 'start' });">Motion &amp; Impact</a><a class="px-5 py-2.5 rounded-full font-label-md text-sm text-on-surface-variant hover:text-on-surface transition-all cursor-pointer font-medium" data-path="trip-logs-score" href="/trip-logs">Trip Logs &amp; Score</a></nav><div class="flex items-center gap-3.5 shrink-0"><div id="hardware-status-badge" class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-container-low border border-surface-container-high/40 transition-all cursor-pointer group hover:bg-surface-container" title="Click to manage serial port connection" onclick="openSerialModal()"><span class="relative flex h-2.5 w-2.5"><span id="hardware-status-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span><span id="hardware-status-dot" class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span></span><span id="hardware-status-text" class="font-label-sm text-xs font-semibold text-on-surface-variant">Scanning for Arduino...</span><span class="material-symbols-outlined text-outline text-[16px] group-hover:text-primary transition-colors">tune</span></div><div class="hidden xl:flex items-center px-3.5 py-2 rounded-full bg-surface-container-high font-label-md text-xs text-on-surface font-bold tracking-wider">14:42:08 UTC</div><button aria-label="Toggle Alert Chime" class="w-10 h-10 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center justify-center transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[22px]">notifications_active</span></button><button aria-label="Toggle Light/Dark Theme" class="w-10 h-10 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center justify-center transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[22px]">light_mode</span></button><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-md"><span class="material-symbols-outlined text-on-primary text-[20px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 py-8 space-y-8">
+<!-- MASTER HERO STATUS BANNER -->
+<section class="relative overflow-hidden rounded-3xl bg-surface-container-lowest p-7 sm:p-10 shadow-2xl border border-surface-container-high/60 transition-all duration-500" id="master-hero-banner">
+<div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-secondary/15 blur-3xl pointer-events-none transition-all duration-700" id="banner-glow-bg"></div>
+<div class="relative z-10 flex flex-col xl:flex-row xl:items-center justify-between gap-6">
+<div class="flex items-start sm:items-center gap-5">
+<div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-secondary-fixed/50 flex items-center justify-center shrink-0 shadow-lg transition-colors duration-500" id="status-icon-bubble">
+<span class="material-symbols-outlined text-[36px] sm:text-[44px] text-secondary" id="status-icon">verified_user</span>
+</div>
+<div class="flex flex-col space-y-2">
+<div class="flex flex-wrap items-center gap-3">
+<span class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-on-surface tracking-tight" id="banner-status-tag">ALL SYSTEMS SAFE · READY TO RIDE</span>
+<span class="px-3.5 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold tracking-wider uppercase shadow-sm" id="banner-mode-pill">Interlock Active</span>
+</div>
+<p class="text-base sm:text-lg text-on-surface-variant font-medium leading-relaxed max-w-4xl" id="banner-subtitle">
+              Helmet secured, rider sober, and alertness verified. Solenoid energized &amp; ignition relay armed.
+            </p>
+</div>
+</div>
+<div class="flex flex-wrap sm:flex-nowrap items-center gap-4 shrink-0">
+<div class="flex flex-col p-4 rounded-2xl bg-surface-container-low shadow-sm border border-surface-container-high/40 min-w-[160px]">
+<div class="flex items-center justify-between gap-3">
+<span class="text-xs uppercase font-bold text-outline tracking-wider">Relay State</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-ping" id="relay-pulse-dot"></span>
+<span class="text-sm text-secondary font-extrabold" id="relay-text">LIVE (ON)</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="text-3xl sm:text-4xl font-black text-on-surface" id="battery-voltage-text">12.4</span>
+<span class="font-telemetry-unit text-xs text-outline font-bold">VDC · 10A</span>
+</div>
+</div>
+<button class="px-6 py-4 rounded-2xl bg-primary text-on-primary font-bold text-base shadow-lg hover:bg-primary-container hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2.5 cursor-pointer" id="toggle-engine-btn" type="button">
+<span class="material-symbols-outlined text-[24px]">power_settings_new</span>
+<span>Remote Killswitch</span>
+</button>
+</div>
+</div>
+<!-- Live Simulation State Quick Bar -->
+<div class="relative z-10 mt-6 pt-5 bg-surface-container-low/70 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-3 border border-surface-container-high/40">
+<div class="flex items-center gap-2.5 text-outline">
+<span class="material-symbols-outlined text-[20px] text-primary">science</span>
+<span class="text-xs sm:text-sm font-bold tracking-wider uppercase">Live Simulator Quick Trigger:</span>
+</div>
+<div class="flex flex-wrap items-center gap-2.5">
+<button class="state-pill-btn px-4 py-2 rounded-full text-on-surface text-xs sm:text-sm font-bold bg-surface-container-lowest shadow-sm hover:bg-surface-container hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer" onclick="setSystemState('safe')" type="button">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span> Safe Rider
+          </button>
+<button class="state-pill-btn px-4 py-2 rounded-full text-on-surface text-xs sm:text-sm font-bold bg-surface-container-lowest shadow-sm hover:bg-surface-container hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer" onclick="setSystemState('helmet-off')" type="button">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container"></span> Helmet Off
+          </button>
+<button class="state-pill-btn px-4 py-2 rounded-full text-on-surface text-xs sm:text-sm font-bold bg-surface-container-lowest shadow-sm hover:bg-surface-container hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer" onclick="setSystemState('alcohol')" type="button">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span> Alcohol Spike
+          </button>
+<button class="state-pill-btn px-4 py-2 rounded-full text-on-surface text-xs sm:text-sm font-bold bg-surface-container-lowest shadow-sm hover:bg-surface-container hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer" onclick="setSystemState('drowsy')" type="button">
+<span class="w-2.5 h-2.5 rounded-full bg-outline"></span> Drowsy
+          </button>
+<button class="state-pill-btn px-4 py-2 rounded-full text-on-tertiary text-xs sm:text-sm font-bold bg-tertiary-container shadow-md hover:bg-tertiary hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer" onclick="triggerCrashModal()" type="button">
+<span class="material-symbols-outlined text-[16px]">e911_emergency</span> Crash Fall (4.5G)
+          </button>
+</div>
+</div>
+</section>
+
+<!-- ON-BIKE 16x2 I2C CHARACTER LCD DIGITAL TWIN -->
+<section class="rounded-3xl bg-surface-container-lowest p-6 sm:p-8 shadow-2xl border border-surface-container-high/60 relative overflow-hidden" id="section-virtual-lcd">
+  <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+    <!-- Left: Title & Hardware Details -->
+    <div class="flex flex-col space-y-2 max-w-lg">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-primary-container text-on-primary flex items-center justify-center shadow-md">
+          <span class="material-symbols-outlined text-[26px]">terminal</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl sm:text-2xl font-extrabold text-on-surface tracking-tight">On-Bike 16x2 I2C LCD</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold tracking-wider uppercase shadow-sm" id="lcd-hardware-mode-badge">Digital Twin Active</span>
+          </div>
+          <span class="text-xs text-outline font-mono font-semibold">PCF8574T · I2C Bus Addr: 0x27 (A4 SDA / A5 SCL)</span>
+        </div>
+      </div>
+      <p class="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+        Live digital twin mirroring the physical motorcycle handlebar display. Renders real-time ignition states, alcohol diagnostics, and warning messages with complete visual parity even if the physical screen is disconnected.
+      </p>
+      <div class="flex items-center gap-3 pt-1">
+        <span class="flex items-center gap-1.5 text-xs text-outline font-semibold">
+          <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" id="lcd-comm-led"></span>
+          <span>I2C Bus: 100 kHz Sync</span>
+        </span>
+        <span class="text-outline text-xs">·</span>
+        <button onclick="toggleLcdColor()" class="text-xs font-bold text-primary hover:underline cursor-pointer flex items-center gap-1">
+          <span class="material-symbols-outlined text-[15px]">palette</span>
+          <span id="lcd-theme-btn-text">Switch to Emerald Green</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Center/Right: The Realistic 16x2 LCD Display -->
+    <div class="w-full max-w-2xl bg-[#0a1120] rounded-2xl p-4 sm:p-6 shadow-2xl border-4 border-[#1e293b] relative group">
+      <!-- PCB Mounting Holes at 4 corners -->
+      <div class="absolute top-2.5 left-2.5 w-3 h-3 rounded-full bg-[#334155] border border-[#64748b]/50 shadow-inner"></div>
+      <div class="absolute top-2.5 right-2.5 w-3 h-3 rounded-full bg-[#334155] border border-[#64748b]/50 shadow-inner"></div>
+      <div class="absolute bottom-2.5 left-2.5 w-3 h-3 rounded-full bg-[#334155] border border-[#64748b]/50 shadow-inner"></div>
+      <div class="absolute bottom-2.5 right-2.5 w-3 h-3 rounded-full bg-[#334155] border border-[#64748b]/50 shadow-inner"></div>
+
+      <!-- Header Silkscreen Label on PCB -->
+      <div class="flex items-center justify-between text-[10px] text-[#64748b] font-mono tracking-widest uppercase mb-2 px-1">
+        <span>1602A QAPASS · PCF8574T</span>
+        <span class="text-[#38bdf8] font-bold flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-ping"></span>
+          HD44780 CONTROLLER
+        </span>
+      </div>
+
+      <!-- Glowing LCD Screen Inner Bezel -->
+      <div id="lcd-screen-bezel" class="rounded-xl p-4 sm:p-5 bg-gradient-to-b from-[#00286b] to-[#001744] border-2 border-[#00388c] shadow-[inset_0_2px_12px_rgba(0,0,0,0.8),0_0_20px_rgba(0,149,255,0.25)] relative overflow-hidden transition-all duration-300">
+        <!-- Dot-matrix pixel grid overlay effect -->
+        <div class="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:6px_6px] pointer-events-none opacity-40"></div>
+
+        <!-- 16x2 Character Grid -->
+        <div class="flex flex-col gap-2 font-mono text-base sm:text-2xl font-bold tracking-[0.16em] sm:tracking-[0.24em] select-none uppercase transition-colors duration-300" id="lcd-text-container" style="color: #e0f7ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 149, 255, 0.4);">
+          <!-- Line 1: 16 Chars -->
+          <div class="flex items-center justify-between overflow-hidden whitespace-pre">
+            <span id="virtual-lcd-line1">HELMET: SAFE OK </span>
+            <span class="text-[10px] font-sans text-white/40 tracking-normal uppercase">L1</span>
+          </div>
+          <!-- Line 2: 16 Chars -->
+          <div class="flex items-center justify-between overflow-hidden whitespace-pre">
+            <span id="virtual-lcd-line2">ENGINE: STARTED </span>
+            <span class="text-[10px] font-sans text-white/40 tracking-normal uppercase">L2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer PCB Status Indicators -->
+      <div class="flex items-center justify-between text-[11px] font-mono text-[#94a3b8] mt-3 px-1">
+        <div class="flex items-center gap-3">
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> 5V VCC</span>
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span> SDA (A4)</span>
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> SCL (A5)</span>
+        </div>
+        <span class="text-[10px] text-[#64748b]">16 COLUMNS × 2 ROWS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 CORE SENSOR TELEMETRY CARDS -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-8">
+<!-- Card 1: Optical IR Helmet Wear -->
+<div class="rounded-3xl bg-surface-container-lowest p-7 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-surface-container-high/60 flex flex-col justify-between group min-h-[350px]" id="card-sensor-helmet">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary/70"></span>
+<span class="text-xs sm:text-sm font-label-md font-bold text-outline uppercase tracking-wider">OPT-01 · IR Optic</span>
+</div>
+<div class="px-3.5 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm" id="badge-helmet">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> FASTENED
+</div>
+</div>
+<div class="flex items-center gap-4 my-4">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary shadow-inner group-hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined text-[36px]">sports_motorsports</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-semibold text-outline uppercase tracking-wider">Wear Lock Sensor</span>
+<div class="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mt-0.5" id="text-helmet-val">Engaged</div>
+</div>
+</div>
+<p class="text-sm sm:text-base text-on-surface-variant leading-relaxed mt-3 min-h-[48px]" id="desc-helmet">
+            IR beam uninterrupted · Head contact capacitive lock confirmed.
+          </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-low/90 rounded-2xl p-4 flex items-center justify-between border border-surface-container-high/40">
+<span class="text-sm font-semibold text-on-surface">Simulate Removal</span>
+<button class="w-14 h-7.5 bg-secondary rounded-full p-1 transition-all duration-300 focus:outline-none flex items-center justify-end shadow-inner cursor-pointer" id="btn-toggle-helmet" type="button" aria-label="Toggle Helmet Removal">
+<span class="w-5.5 h-5.5 bg-surface-container-lowest rounded-full shadow-md"></span>
+</button>
+</div>
+</div>
+<!-- Card 2: MQ-3 Breathalyzer -->
+<div class="rounded-3xl bg-surface-container-lowest p-7 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-surface-container-high/60 flex flex-col justify-between group min-h-[350px]" id="card-sensor-alcohol">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary/70"></span>
+<span class="text-xs sm:text-sm font-label-md font-bold text-outline uppercase tracking-wider">GAS-03 · MQ-3 Sensor</span>
+</div>
+<div class="px-3.5 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm" id="badge-alcohol">
+<span class="w-2 h-2 rounded-full bg-primary"></span> 0.00% BAC (SOBER)
+</div>
+</div>
+<div class="flex items-center gap-4 my-4">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary shadow-inner group-hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined text-[36px]">air</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-semibold text-outline uppercase tracking-wider">Analog ADC Level</span>
+<div class="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mt-0.5" id="text-alcohol-val">142 rawADC</div>
+</div>
+</div>
+<p class="text-sm sm:text-base text-on-surface-variant leading-relaxed mt-3 min-h-[48px]" id="desc-alcohol">
+            Zero-tolerance threshold 350. Clean alcohol-free exhaled breath detected.
+          </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-low/90 rounded-2xl p-4 flex items-center justify-between border border-surface-container-high/40">
+<span class="text-sm font-semibold text-on-surface">Inject Vapor Spike</span>
+<button class="px-4 py-2 rounded-xl bg-surface-container-high text-on-surface text-xs sm:text-sm font-bold hover:bg-primary hover:text-on-primary transition-all shadow-sm active:scale-95 cursor-pointer" id="btn-toggle-alcohol" type="button">
+            Trigger BAC
+          </button>
+</div>
+</div>
+<!-- Card 3: Eye Blink Drowsiness -->
+<div class="rounded-3xl bg-surface-container-lowest p-7 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-surface-container-high/60 flex flex-col justify-between group min-h-[350px]" id="card-sensor-blink">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary/70"></span>
+<span class="text-xs sm:text-sm font-label-md font-bold text-outline uppercase tracking-wider">OPT-02 · Eye-Tracker</span>
+</div>
+<div class="px-3.5 py-1.5 rounded-full bg-surface-container-high text-on-surface text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm" id="badge-blink">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> AWAKE &amp; FOCUSED
+</div>
+</div>
+<div class="flex items-center gap-4 my-4">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary shadow-inner group-hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined text-[36px]">visibility</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-semibold text-outline uppercase tracking-wider">PERCLOS Index</span>
+<div class="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mt-0.5" id="text-blink-val">4.2% <span class="text-sm font-normal text-outline">(16 blinks/m)</span></div>
+</div>
+</div>
+<p class="text-sm sm:text-base text-on-surface-variant leading-relaxed mt-3 min-h-[48px]" id="desc-blink">
+            Normal eyelid closure velocity. Alertness rating high &amp; consistent.
+          </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-low/90 rounded-2xl p-4 flex items-center justify-between border border-surface-container-high/40">
+<span class="text-sm font-semibold text-on-surface">Simulate Microsleep</span>
+<button class="px-4 py-2 rounded-xl bg-surface-container-high text-on-surface text-xs sm:text-sm font-bold hover:bg-tertiary-container hover:text-on-tertiary transition-all shadow-sm active:scale-95 cursor-pointer" id="btn-toggle-blink" type="button">
+            Induce Sleep
+          </button>
+</div>
+</div>
+<!-- Card 4: Optocoupled Starter Relay -->
+<div class="rounded-3xl bg-surface-container-lowest p-7 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-surface-container-high/60 flex flex-col justify-between group min-h-[350px]" id="card-sensor-relay">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary/70"></span>
+<span class="text-xs sm:text-sm font-label-md font-bold text-outline uppercase tracking-wider">RELAY · Optocoupler</span>
+</div>
+<div class="px-3.5 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm" id="badge-relay">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> IGNITION ON
+</div>
+</div>
+<div class="flex items-center gap-4 my-4">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary shadow-inner group-hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined text-[36px]">bolt</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-semibold text-outline uppercase tracking-wider">Interlock Relay</span>
+<div class="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mt-0.5" id="text-relay-val">ENERGIZED</div>
+</div>
+</div>
+<p class="text-sm sm:text-base text-on-surface-variant leading-relaxed mt-3 min-h-[48px]" id="desc-relay">
+            Dual optoisolator gate saturated. Starter circuit continuity complete.
+          </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-low/90 rounded-2xl p-4 flex items-center justify-between border border-surface-container-high/40">
+<span class="text-sm font-semibold text-on-surface">Emergency Latch</span>
+<button class="px-4 py-2 rounded-xl bg-tertiary text-on-tertiary text-xs sm:text-sm font-bold hover:bg-tertiary-container transition-all shadow-sm active:scale-95 cursor-pointer" id="btn-manual-cutoff" type="button">
+            Trip Cutoff
+          </button>
+</div>
+</div>
+</section>
+<!-- 3D DIGITAL TWIN & VIVA PRESENTATION EXPERIMENTAL SCENARIOS -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- 3D Helmet Viewport (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-3xl p-7 sm:p-9 shadow-2xl border border-surface-container-high/60 relative overflow-hidden flex flex-col">
+<div class="flex items-center justify-between mb-5">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[26px]">view_in_ar</span>
+<span class="text-xl sm:text-2xl font-extrabold text-on-surface tracking-tight">3D Telemetry Twin · AegisMark V</span>
+</div>
+<span class="px-3.5 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold tracking-wider uppercase">
+            MPU-6050 DCM Filter
+          </span>
+</div>
+<!-- 3D Canvas Container with Floating Dynamic HUD Pills -->
+<div class="relative w-full h-[480px] sm:h-[520px] rounded-2xl bg-surface-container-low flex items-center justify-center overflow-hidden shadow-inner">
+<!-- STITCH_THREEJS_START:ANIMATION_2 class="w-full h-full bg-transparent rounded-2xl" -->
+<div class="w-full h-full bg-transparent rounded-2xl" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_2" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_2');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  // Three.js 3D Helmet Digital Twin with studio lighting, metallic finish, illuminated visor HUD, and live attitude rotation
+const width = container.clientWidth || 500;
+const height = container.clientHeight || 420;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+camera.position.set(0, 1.2, 5.2);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+container.appendChild(renderer.domElement);
+
+// Lighting setup - Luxury automotive studio
+const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+scene.add(ambientLight);
+
+const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
+keyLight.position.set(4, 6, 5);
+keyLight.castShadow = true;
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(0x38bdf8, 1.2);
+fillLight.position.set(-5, 2, -2);
+scene.add(fillLight);
+
+const rimLight = new THREE.DirectionalLight(0x10b981, 1.8);
+rimLight.position.set(0, 4, -4);
+scene.add(rimLight);
+
+const bottomGlow = new THREE.PointLight(0x2563eb, 2.0, 10);
+bottomGlow.position.set(0, -2, 1);
+scene.add(bottomGlow);
+
+// Helmet Group
+const helmetGroup = new THREE.Group();
+
+// Materials
+const shellMaterial = new THREE.MeshPhongMaterial({
+  color: 0x0f172a,
+  specular: 0x94a3b8,
+  shininess: 90,
+  flatShading: false
+});
+
+const accentDecalMaterial = new THREE.MeshPhongMaterial({
+  color: 0x2563eb,
+  specular: 0x60a5fa,
+  shininess: 100
+});
+
+const visorMaterial = new THREE.MeshPhongMaterial({
+  color: 0x030712,
+  specular: 0x38bdf8,
+  shininess: 120,
+  opacity: 0.88,
+  transparent: true
+});
+
+const neonRimMaterial = new THREE.MeshBasicMaterial({
+  color: 0x10b981
+});
+
+// Helmet Outer Dome (Semi-ovoid using deformed sphere)
+const domeGeo = new THREE.SphereGeometry(1.4, 48, 48, 0, Math.PI * 2, 0, Math.PI * 0.75);
+const dome = new THREE.Mesh(domeGeo, shellMaterial);
+dome.scale.set(1.0, 1.15, 1.2);
+helmetGroup.add(dome);
+
+// Helmet Jaw / Chin Bar
+const chinGeo = new THREE.CylinderGeometry(1.22, 1.1, 0.7, 32, 1, false, Math.PI * 0.15, Math.PI * 0.7);
+const chin = new THREE.Mesh(chinGeo, shellMaterial);
+chin.position.set(0, -0.45, 0.55);
+chin.rotation.x = 0.2;
+helmetGroup.add(chin);
+
+// Tinted Visor
+const visorGeo = new THREE.SphereGeometry(1.36, 40, 32, Math.PI * 0.22, Math.PI * 0.56, Math.PI * 0.28, Math.PI * 0.38);
+const visor = new THREE.Mesh(visorGeo, visorMaterial);
+visor.scale.set(1.02, 1.14, 1.24);
+visor.position.set(0, -0.05, 0.04);
+helmetGroup.add(visor);
+
+// Visor Neon HUD Trim / Optical Sensor Band
+const visorTrimGeo = new THREE.TorusGeometry(1.26, 0.025, 16, 64, Math.PI * 0.65);
+const visorTrim = new THREE.Mesh(visorTrimGeo, neonRimMaterial);
+visorTrim.position.set(0, 0.15, 0.62);
+visorTrim.rotation.x = 0.55;
+visorTrim.rotation.z = -Math.PI * 0.325;
+helmetGroup.add(visorTrim);
+
+// Aerodynamic Spoiler / Fin at the rear
+const finGeo = new THREE.BoxGeometry(0.12, 0.6, 0.8);
+const fin = new THREE.Mesh(finGeo, accentDecalMaterial);
+fin.position.set(0, 0.7, -0.9);
+fin.rotation.x = -0.4;
+helmetGroup.add(fin);
+
+// Crown Air Intake Vent
+const ventGeo = new THREE.CylinderGeometry(0.18, 0.25, 0.5, 16);
+const vent = new THREE.Mesh(ventGeo, accentDecalMaterial);
+vent.position.set(0, 1.35, 0.1);
+vent.rotation.x = 0.6;
+helmetGroup.add(vent);
+
+// Side IoT Optical Sensor Nodes (Left & Right)
+const sensorGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.15, 20);
+const sensorMat = new THREE.MeshPhongMaterial({ color: 0x10b981, emissive: 0x059669 });
+const leftSensor = new THREE.Mesh(sensorGeo, sensorMat);
+leftSensor.position.set(1.35, -0.1, 0.3);
+leftSensor.rotation.z = Math.PI / 2;
+helmetGroup.add(leftSensor);
+
+const rightSensor = new THREE.Mesh(sensorGeo, sensorMat);
+rightSensor.position.set(-1.35, -0.1, 0.3);
+rightSensor.rotation.z = -Math.PI / 2;
+helmetGroup.add(rightSensor);
+
+// Floating Circular Pedestal Base
+const baseRingGeo = new THREE.RingGeometry(1.7, 1.82, 64);
+const baseRingMat = new THREE.MeshBasicMaterial({ color: 0x3b82f6, side: THREE.DoubleSide });
+const baseRing = new THREE.Mesh(baseRingGeo, baseRingMat);
+baseRing.position.set(0, -1.2, 0);
+baseRing.rotation.x = Math.PI / 2;
+scene.add(baseRing);
+
+scene.add(helmetGroup);
+
+// Internal state tracking for Pitch and Roll
+let targetPitch = 0.036; // +2.1 deg
+let targetRoll = 0.014;  // +0.8 deg
+let currentPitch = 0.036;
+let currentRoll = 0.014;
+let yawOffset = 0;
+
+// Listen for custom events dispatched by the UI for pitch/roll interactive sliders and presets
+window.addEventListener('aegis-telemetry-update', (e) => {
+  if (e.detail) {
+    if (typeof e.detail.pitch === 'number') targetPitch = (e.detail.pitch * Math.PI) / 180;
+    if (typeof e.detail.roll === 'number') targetRoll = (e.detail.roll * Math.PI) / 180;
+  }
+});
+
+// Resize handler
+window.addEventListener('resize', () => {
+  const w = container.clientWidth || 500;
+  const h = container.clientHeight || 420;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+});
+
+// Animation Loop
+let clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  const elapsedTime = clock.getElapsedTime();
+
+  // Subtle floating breathing motion
+  const hover = Math.sin(elapsedTime * 1.8) * 0.04;
+  helmetGroup.position.y = hover;
+
+  // Gentle idle yaw scan combined with smooth lerp to MPU-6050 pitch & roll
+  yawOffset = Math.sin(elapsedTime * 0.7) * 0.18;
+  currentPitch += (targetPitch - currentPitch) * 0.08;
+  currentRoll += (targetRoll - currentRoll) * 0.08;
+
+  helmetGroup.rotation.x = currentPitch;
+  helmetGroup.rotation.z = -currentRoll;
+  helmetGroup.rotation.y = yawOffset - 0.25;
+
+  baseRing.rotation.z = elapsedTime * 0.3;
+
+  renderer.render(scene, camera);
+}
+
+// Auto-adjust 3D canvas on window resize
+window.addEventListener('resize', () => {
+  const w = container.clientWidth;
+  const h = container.clientHeight;
+  if (w && h) {
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  }
+});
+
+animate();
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_2 -->
+<!-- Floating Attitude Overlays -->
+<div class="absolute top-5 left-5 z-20 flex flex-col gap-2.5">
+<div class="px-4 py-2 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-md text-xs sm:text-sm font-bold text-on-surface flex items-center gap-2.5 border border-surface-container-high/40">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<span>Pitch: <strong class="font-mono text-primary font-bold" id="hud-pitch-val">+2.1°</strong> (Forward Nod)</span>
+</div>
+<div class="px-4 py-2 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-md text-xs sm:text-sm font-bold text-on-surface flex items-center gap-2.5 border border-surface-container-high/40">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+<span>Roll: <strong class="font-mono text-secondary font-bold" id="hud-roll-val">+0.8°</strong> (Lateral Tilt)</span>
+</div>
+</div>
+<div class="absolute bottom-5 right-5 z-20">
+<div class="px-4 py-2 rounded-full bg-surface-container-lowest/95 backdrop-blur-md shadow-md text-xs sm:text-sm font-bold text-on-surface flex items-center gap-2.5 border border-surface-container-high/40">
+<span class="material-symbols-outlined text-primary text-[18px]">rotate_90_degrees_ccw</span>
+<span>Gyro Calibration: <strong class="text-secondary font-extrabold">OK (Zero Drift)</strong></span>
+</div>
+</div>
+</div>
+<!-- Live Sub-metrics ribbon -->
+<div class="grid grid-cols-3 gap-4 mt-6 pt-5 bg-surface-container-low/80 rounded-2xl p-5 border border-surface-container-high/40">
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-outline">Ground Speed</span>
+<div class="flex items-baseline gap-1.5 mt-1.5">
+<span class="text-3xl sm:text-4xl font-black text-on-surface">42</span>
+<span class="font-telemetry-unit text-xs sm:text-sm text-outline font-bold">km/h</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-outline">Dynamic G-Force</span>
+<div class="flex items-baseline gap-1.5 mt-1.5">
+<span class="text-3xl sm:text-4xl font-black text-secondary" id="ribbon-g-val">0.99</span>
+<span class="font-telemetry-unit text-xs sm:text-sm text-outline font-bold">G</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-outline">Piezo Buzzer State</span>
+<div class="flex items-center gap-2 mt-2.5">
+<span class="w-3 h-3 rounded-full bg-secondary shadow-sm" id="buzzer-dot"></span>
+<span class="text-xs sm:text-sm font-extrabold text-on-surface" id="buzzer-text">STANDBY (0 dB)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- System Test Rig (5 Cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-3xl p-7 sm:p-9 shadow-2xl border border-surface-container-high/60 flex flex-col justify-between space-y-6">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="text-xl sm:text-2xl font-extrabold text-on-surface tracking-tight">System Test Rig</span>
+<span class="px-3.5 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold tracking-wider uppercase shadow-sm">
+              Automated Test
+            </span>
+</div>
+<p class="text-sm sm:text-base text-on-surface-variant leading-relaxed">
+            One-touch automated test cases to evaluate real-time hardware safety interlock responses:
+          </p>
+<div class="flex flex-col gap-3.5 mt-5">
+<!-- Case 1 -->
+<button class="w-full p-4 sm:p-5 rounded-2xl bg-surface-container-low hover:bg-surface-container hover:shadow-md transition-all flex items-center justify-between text-left group border border-transparent hover:border-surface-container-high cursor-pointer" onclick="runVivaCase(1)" type="button">
+<div class="flex items-center gap-3.5">
+<span class="w-11 h-11 rounded-2xl bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-black text-sm shadow-sm">C1</span>
+<div>
+<div class="text-base sm:text-lg font-bold text-on-surface">Case 1 · Safe &amp; Sober</div>
+<div class="text-xs sm:text-sm text-outline font-medium mt-0.5">IR beam on + BAC 0.00% → Relay ON</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[24px]">play_circle</span>
+</button>
+<!-- Case 2 -->
+<button class="w-full p-4 sm:p-5 rounded-2xl bg-surface-container-low hover:bg-surface-container hover:shadow-md transition-all flex items-center justify-between text-left group border border-transparent hover:border-surface-container-high cursor-pointer" onclick="runVivaCase(2)" type="button">
+<div class="flex items-center gap-3.5">
+<span class="w-11 h-11 rounded-2xl bg-surface-container-highest text-on-surface flex items-center justify-center font-black text-sm shadow-sm">C2</span>
+<div>
+<div class="text-base sm:text-lg font-bold text-on-surface">Case 2 · Helmet Removed</div>
+<div class="text-xs sm:text-sm text-outline font-medium mt-0.5">IR open → Ignition interlock cuts off</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[24px]">play_circle</span>
+</button>
+<!-- Case 3 -->
+<button class="w-full p-4 sm:p-5 rounded-2xl bg-surface-container-low hover:bg-surface-container hover:shadow-md transition-all flex items-center justify-between text-left group border border-transparent hover:border-surface-container-high cursor-pointer" onclick="runVivaCase(3)" type="button">
+<div class="flex items-center gap-3.5">
+<span class="w-11 h-11 rounded-2xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-black text-sm shadow-sm">C3</span>
+<div>
+<div class="text-base sm:text-lg font-bold text-on-surface">Case 3 · Alcohol Spike</div>
+<div class="text-xs sm:text-sm text-outline font-medium mt-0.5">MQ-3 &gt; 350 ADC → Red alert, Relay kills</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[24px]">play_circle</span>
+</button>
+<!-- Case 4 -->
+<button class="w-full p-4 sm:p-5 rounded-2xl bg-surface-container-low hover:bg-surface-container hover:shadow-md transition-all flex items-center justify-between text-left group border border-transparent hover:border-surface-container-high cursor-pointer" onclick="runVivaCase(4)" type="button">
+<div class="flex items-center gap-3.5">
+<span class="w-11 h-11 rounded-2xl bg-surface-container-high text-on-surface flex items-center justify-center font-black text-sm shadow-sm">C4</span>
+<div>
+<div class="text-base sm:text-lg font-bold text-on-surface">Case 4 · Microsleep Alarm</div>
+<div class="text-xs sm:text-sm text-outline font-medium mt-0.5">PERCLOS &gt; 18% → 85dB Buzzer chirp</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[24px]">play_circle</span>
+</button>
+<!-- Case 5 -->
+<button class="w-full p-4 sm:p-5 rounded-2xl bg-tertiary-container/10 hover:bg-tertiary-container/20 hover:shadow-md transition-all flex items-center justify-between text-left group border border-tertiary-container/30 cursor-pointer" onclick="runVivaCase(5)" type="button">
+<div class="flex items-center gap-3.5">
+<span class="w-11 h-11 rounded-2xl bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-black text-sm shadow-sm">C5</span>
+<div>
+<div class="text-base sm:text-lg font-bold text-tertiary">Case 5 · Crash Fall (4.5G)</div>
+<div class="text-xs sm:text-sm text-outline font-medium mt-0.5">MPU-6050 &gt; 3.2G → Automatic SOS Countdown</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary group-hover:scale-110 transition-transform text-[24px]">warning</span>
+</button>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low/80 rounded-2xl flex items-center justify-between border border-surface-container-high/40">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px]">terminal</span>
+<span class="text-xs sm:text-sm text-on-surface-variant font-semibold">Baud 115200 · Packet Checksum</span>
+</div>
+<span class="text-xs sm:text-sm text-secondary font-extrabold">CRC32 VALID</span>
+</div>
+</div>
+</section>
+<!-- MPU-6050 MOTION & G-FORCE ANALYTICS SECTION -->
+<section id="section-motion" class="bg-surface-container-lowest rounded-3xl p-7 sm:p-10 shadow-2xl border border-surface-container-high/60 space-y-6 scroll-mt-28">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[26px]">show_chart</span>
+<span class="text-xl sm:text-2xl font-extrabold text-on-surface tracking-tight">MPU-6050 6-Axis Inertial Waveform (60 FPS)</span>
+</div>
+<p class="text-sm sm:text-base text-on-surface-variant leading-relaxed mt-1">
+            Oscilloscope trace of accelerometer vector magnitude with continuous baseline calibration.
+          </p>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex items-center gap-3 text-xs sm:text-sm font-semibold text-on-surface-variant bg-surface-container-low px-4 py-2 rounded-full border border-surface-container-high/40">
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-secondary"></span> Vector Total</span>
+<span class="flex items-center gap-1.5 ml-2"><span class="w-2.5 h-2.5 rounded-full bg-primary"></span> Z-Axis</span>
+<span class="flex items-center gap-1.5 ml-2"><span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span> Crash Limit (3.2G)</span>
+</div>
+</div>
+</div>
+<!-- Real-time Canvas Graph -->
+<div class="w-full h-64 sm:h-72 bg-surface-container-low rounded-2xl relative overflow-hidden flex items-center justify-center shadow-inner border border-surface-container-high/40">
+<canvas class="w-full h-full block" id="motion-oscilloscope"></canvas>
+</div>
+<!-- Telemetry Subcards + Interactive Sliders -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<div class="p-5 rounded-2xl bg-surface-container-low/80 border border-surface-container-high/40 shadow-sm">
+<span class="text-xs uppercase font-bold text-outline tracking-wider">Dynamic G-Force</span>
+<div class="flex items-baseline gap-1.5 mt-2">
+<span class="text-3xl sm:text-4xl font-black text-secondary" id="card-accel-mag">0.99</span>
+<span class="font-telemetry-unit text-xs text-outline font-bold">G (Norm)</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 mt-3">
+<div class="bg-secondary h-2 rounded-full transition-all" id="bar-accel-mag" style="width: 25%"></div>
+</div>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-low/80 border border-surface-container-high/40 shadow-sm">
+<span class="text-xs uppercase font-bold text-outline tracking-wider">X-Axis (Lateral Tilt)</span>
+<div class="flex items-baseline gap-1.5 mt-2">
+<span class="text-3xl sm:text-4xl font-black text-on-surface" id="card-accel-x">+0.04</span>
+<span class="font-telemetry-unit text-xs text-outline font-bold">G</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 mt-3">
+<div class="bg-primary h-2 rounded-full" style="width: 52%"></div>
+</div>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-low/80 border border-surface-container-high/40 shadow-sm">
+<span class="text-xs uppercase font-bold text-outline tracking-wider">Y-Axis (Pitch / Surge)</span>
+<div class="flex items-baseline gap-1.5 mt-2">
+<span class="text-3xl sm:text-4xl font-black text-on-surface" id="card-accel-y">-0.02</span>
+<span class="font-telemetry-unit text-xs text-outline font-bold">G</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 mt-3">
+<div class="bg-outline h-2 rounded-full" style="width: 48%"></div>
+</div>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-low/80 border border-surface-container-high/40 shadow-sm">
+<span class="text-xs uppercase font-bold text-outline tracking-wider">Z-Axis (Vertical Heave)</span>
+<div class="flex items-baseline gap-1.5 mt-2">
+<span class="text-3xl sm:text-4xl font-black text-primary" id="card-accel-z">+0.99</span>
+<span class="font-telemetry-unit text-xs text-outline font-bold">G</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 mt-3">
+<div class="bg-primary h-2 rounded-full" style="width: 32%"></div>
+</div>
+</div>
+</div>
+<!-- Real-time 3D Attitude Manipulation Sliders -->
+<div class="p-5 sm:p-7 bg-surface-container-low/80 rounded-2xl space-y-5 border border-surface-container-high/40 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">tune</span>
+<span class="text-sm sm:text-base text-on-surface font-bold">Interactive 3D Attitude Manipulation (Live Telemetry Event Bus)</span>
+</div>
+<button class="text-xs sm:text-sm text-primary font-bold hover:underline cursor-pointer" onclick="resetAttitudeSliders()" type="button">Reset Flat</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<div class="flex items-center justify-between text-xs sm:text-sm font-semibold">
+<span class="text-on-surface-variant">Pitch Angle (Nod): <strong class="text-primary font-bold" id="slider-pitch-label">+2.1°</strong></span>
+<span class="text-outline">-45° to +45°</span>
+</div>
+<input class="w-full accent-primary h-2.5 bg-surface-container-highest rounded-lg cursor-pointer" id="input-pitch" max="45" min="-45" step="0.5" type="range" value="2.1"/>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between text-xs sm:text-sm font-semibold">
+<span class="text-on-surface-variant">Roll Angle (Lean): <strong class="text-secondary font-bold" id="slider-roll-label">+0.8°</strong></span>
+<span class="text-outline">-45° to +45°</span>
+</div>
+<input class="w-full accent-secondary h-2.5 bg-surface-container-highest rounded-lg cursor-pointer" id="input-roll" max="45" min="-45" step="0.5" type="range" value="0.8"/>
+</div>
+</div>
+</div>
+</section>
+<!-- RIDER SAFETY SCORE & BLACKBOX AUDIT LOG -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left: Safety Score (5 Cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-3xl p-7 sm:p-9 shadow-2xl border border-surface-container-high/60 flex flex-col justify-between space-y-6">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-xl sm:text-2xl font-extrabold text-on-surface tracking-tight">Rider Safety Index</span>
+<span class="px-3.5 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold tracking-wider uppercase shadow-sm">Grade A · Exemplary</span>
+</div>
+<!-- Radial Circle Score -->
+<div class="flex items-center gap-6 my-5">
+<div class="relative w-36 h-36 shrink-0 flex items-center justify-center">
+<svg class="w-36 h-36 transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-container-high fill-none" cx="50" cy="50" r="42" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary fill-none rounded-full" cx="50" cy="50" r="42" stroke="currentColor" stroke-dasharray="264" stroke-dashoffset="10.5" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center justify-center">
+<span class="text-4xl sm:text-5xl font-black text-on-surface leading-none">96</span>
+<span class="text-xs font-bold text-outline mt-1">/ 100 PTS</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="text-base sm:text-lg font-bold text-on-surface">Zero Violations Logged</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                Full session interlock adherence with continuous helmet lock verification.
+              </p>
+</div>
+</div>
+<!-- Progress breakdown bars -->
+<div class="space-y-3.5 mt-6">
+<div>
+<div class="flex justify-between text-xs sm:text-sm font-semibold mb-1">
+<span class="text-on-surface-variant">Helmet Compliance</span>
+<span class="text-on-surface font-extrabold">100%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2.5">
+<div class="bg-secondary h-2.5 rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs sm:text-sm font-semibold mb-1">
+<span class="text-on-surface-variant">Motion Smoothness (Lean Stability)</span>
+<span class="text-on-surface font-extrabold">94%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full" style="width: 94%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs sm:text-sm font-semibold mb-1">
+<span class="text-on-surface-variant">Alertness &amp; PERCLOS Focus</span>
+<span class="text-on-surface font-extrabold">98%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2.5">
+<div class="bg-secondary h-2.5 rounded-full" style="width: 98%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Device GPS & Satellite Telemetry Card -->
+<div class="p-5 bg-surface-container-low/90 rounded-2xl flex flex-col gap-3 border border-surface-container-high/60 shadow-sm">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <span class="material-symbols-outlined text-primary text-[24px]">location_on</span>
+      <div class="flex flex-col">
+        <span class="text-xs sm:text-sm font-bold text-on-surface" id="live-gps-place">Live Device Geolocation</span>
+        <span class="text-xs text-outline font-medium font-mono" id="live-gps-coords">Acquiring live GPS fix...</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="requestDeviceGPS()" class="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-surface-container text-xs font-semibold text-on-surface flex items-center gap-1 transition-all cursor-pointer shadow-sm" title="Re-acquire Device GPS Fix">
+        <span class="material-symbols-outlined text-[15px] text-primary">my_location</span> Locate
+      </button>
+      <span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold tracking-wider shadow-sm flex items-center gap-1.5" id="gps-status-pill">
+        <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+        <span id="gps-status-text">GPS ACTIVE</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Interactive OpenStreetMap Canvas -->
+  <div id="live-gps-map" class="w-full h-44 rounded-xl overflow-hidden border border-surface-container-high/60 shadow-inner z-0 relative"></div>
+
+  <!-- Quick Action & Map Link -->
+  <div class="flex items-center justify-between text-xs pt-0.5">
+    <span class="text-outline font-medium" id="gps-accuracy-text">Zero-Hardware GPS · Device Sensor Linked</span>
+    <a id="live-gmaps-link" href="https://maps.google.com/?q=12.9716,77.5946" target="_blank" rel="noopener noreferrer" class="font-bold text-primary hover:underline flex items-center gap-1">
+      Open Google Maps <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+    </a>
+  </div>
+</div>
+</div>
+<!-- Right: Safety Incident Ledger / Blackbox (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-3xl p-7 sm:p-9 shadow-2xl border border-surface-container-high/60 flex flex-col justify-between space-y-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[26px]">history_edu</span>
+<span class="text-xl sm:text-2xl font-extrabold text-on-surface tracking-tight">Blackbox Audit Ledger</span>
+</div>
+<span class="text-xs font-bold text-outline uppercase tracking-wider bg-surface-container-high px-3 py-1 rounded-full">Non-Volatile EEPROM</span>
+</div>
+<div class="space-y-3 max-h-[420px] overflow-y-auto pr-1" id="blackbox-ledger-container">
+<!-- Item 1 -->
+<div class="p-4 rounded-2xl bg-surface-container-low/80 hover:bg-surface-container transition-all flex items-center justify-between gap-4 border border-surface-container-high/30">
+<div class="flex items-center gap-3.5">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-bold text-on-surface">Starter Relay Armed · System Interlock Closed</span>
+<span class="text-xs sm:text-sm text-outline mt-0.5">IR optic valid · MQ-3 clean (&lt;350) · 12.4V Solenoid Active</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold">NORMAL</span>
+<div class="font-telemetry-unit text-xs text-outline mt-1 font-semibold">14:42:01.218</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-4 rounded-2xl bg-surface-container-low/80 hover:bg-surface-container transition-all flex items-center justify-between gap-4 border border-surface-container-high/30">
+<div class="flex items-center gap-3.5">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-bold text-on-surface">Helmet Buckle Latched (Microswitch &amp; IR)</span>
+<span class="text-xs sm:text-sm text-outline mt-0.5">Capacitive check PASSED · Chin strap magnetic lock</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold">NORMAL</span>
+<div class="font-telemetry-unit text-xs text-outline mt-1 font-semibold">14:41:48.092</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-4 rounded-2xl bg-surface-container-low/80 hover:bg-surface-container transition-all flex items-center justify-between gap-4 border border-surface-container-high/30">
+<div class="flex items-center gap-3.5">
+<span class="w-2.5 h-2.5 rounded-full bg-outline"></span>
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-bold text-on-surface">PERCLOS Eye Calibration Succeeded</span>
+<span class="text-xs sm:text-sm text-outline mt-0.5">Blink frequency baseline 16.4/min calibrated under daylight</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-xs font-bold">SYSTEM</span>
+<div class="font-telemetry-unit text-xs text-outline mt-1 font-semibold">14:41:30.404</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="p-4 rounded-2xl bg-surface-container-low/80 hover:bg-surface-container transition-all flex items-center justify-between gap-4 border border-surface-container-high/30">
+<div class="flex items-center gap-3.5">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<div class="flex flex-col">
+<span class="text-xs sm:text-sm font-bold text-on-surface">MPU-6050 Zero-G Offset Compensated</span>
+<span class="text-xs sm:text-sm text-outline mt-0.5">Gyro drift vector eliminated · Reference 1.00G Z-plane locked</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold">SYSTEM</span>
+<div class="font-telemetry-unit text-xs text-outline mt-1 font-semibold">14:41:22.880</div>
+</div>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between text-xs font-semibold text-outline">
+<span>Storage: 42.8 KB of 512 KB EEPROM used</span>
+<button class="hover:text-tertiary transition-colors cursor-pointer" onclick="clearLedgerLog()" type="button">Clear Simulation Cache</button>
+</div>
+</div>
+</section>
+</div>
+<!-- HIGH-G CRASH EMERGENCY PROTOCOL MODAL -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/60 backdrop-blur-md hidden flex items-center justify-center p-4" id="crash-emergency-modal">
+<div class="w-full max-w-lg bg-surface-container-lowest rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+<div class="absolute -top-24 -right-24 w-60 h-60 rounded-full bg-tertiary/20 blur-3xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[30px]">warning</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-tertiary font-bold">⚠️ IMPACT &amp; FALL DETECTED!</div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Automated SOS Protocol Stage 2</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-outline hover:text-on-surface" onclick="closeCrashModal()" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Animated Circular 20-Second Countdown Timer -->
+<div class="flex flex-col items-center justify-center py-2">
+<div class="relative w-36 h-36 flex items-center justify-center">
+<svg class="w-36 h-36 transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-container-high fill-none" cx="50" cy="50" r="42" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-tertiary-container fill-none transition-all duration-1000 ease-linear rounded-full" cx="50" cy="50" id="countdown-circle-svg" r="42" stroke="currentColor" stroke-dasharray="264" stroke-dashoffset="0" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-xl text-headline-xl text-tertiary font-bold leading-none" id="countdown-number">20</span>
+<span class="font-label-sm text-label-sm text-outline">SEC LEFT</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center mt-3">
+          Cancel window before automated SOS alert is broadcast to medical emergency channels.
+        </p>
+</div>
+<!-- Telemetry Impact Snapshot -->
+<div class="p-4 rounded-2xl bg-surface-container-low space-y-2">
+<div class="font-label-sm text-label-sm font-semibold text-on-surface">Incident Telemetry Snapshot:</div>
+<div class="grid grid-cols-3 gap-2 pt-1 font-label-sm text-label-sm">
+<div class="flex flex-col">
+<span class="text-outline">Peak Shock</span>
+<span class="font-bold text-tertiary">4.35 G-Force</span>
+</div>
+<div class="flex flex-col">
+<span class="text-outline">Tilt Vector</span>
+<span class="font-bold text-on-surface">64.2° (Fall)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-outline">Relay Status</span>
+<span class="font-bold text-tertiary">KILLED (OFF)</span>
+</div>
+</div>
+<div class="pt-2.5 text-body-sm text-on-surface-variant flex flex-col gap-2 border-t border-surface-container-high/60 mt-2">
+  <div class="flex items-center justify-between text-xs">
+    <span class="text-on-surface-variant font-medium">Emergency SMS Recipient:</span>
+    <input id="emergency-phone-input" class="bg-surface-container-lowest px-2.5 py-1 rounded-lg font-mono font-bold text-on-surface border border-outline/30 text-xs w-44 shadow-sm" value="+91 98765-43210" placeholder="+CountryCode Number" />
+  </div>
+  <div class="flex items-center justify-between text-xs text-outline">
+    <span class="flex items-center gap-1 font-mono"><span class="material-symbols-outlined text-[16px] text-primary">pin_drop</span><span id="crash-gps-coords">Live GPS: Lat 12.9716°, Lon 77.5946°</span></span>
+    <span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-bold text-[10px]">EMS 108 ARMED</span>
+  </div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-3">
+<button class="w-full py-4 rounded-2xl bg-secondary text-on-secondary font-headline-sm text-body-md font-bold shadow-lg hover:bg-secondary/90 transition-all flex items-center justify-center gap-2" onclick="cancelSOSAlert()" type="button">
+<span class="material-symbols-outlined text-[20px]">thumb_up</span>
+<span>I AM SAFE · CANCEL SOS ALERT</span>
+</button>
+<button class="w-full py-3 rounded-2xl bg-tertiary text-on-tertiary font-label-sm text-label-sm font-semibold hover:bg-tertiary-container transition-all" onclick="dispatchSOSNow()" type="button">
+          DISPATCH EMERGENCY ALERT NOW (NO WAIT)
+        </button>
+</div>
+</div>
+</div>
+<script>
+    // Live Dashboard Telemetry State Store
+    const state = {
+      helmet: true,
+      alcohol: false,
+      drowsy: false,
+      engine: true,
+      countdownTimer: null,
+      countdownRemaining: 20
+    };
+
+    // Master System State Setter
+    function setSystemState(targetState) {
+      if (targetState === 'safe') {
+        state.helmet = true;
+        state.alcohol = false;
+        state.drowsy = false;
+        state.engine = true;
+        applySystemView({
+          title: "ALL SYSTEMS SAFE · READY TO RIDE",
+          pill: "Interlock Active",
+          sub: "Helmet secured, rider sober, and alertness verified. Solenoid energized & ignition relay armed.",
+          type: "safe"
+        });
+        updateVirtualLCD("HELMET: SAFE OK ", "ENGINE: STARTED ");
+      } else if (targetState === 'helmet-off') {
+        state.helmet = false;
+        state.engine = false;
+        applySystemView({
+          title: "HELMET REMOVED · IGNITION DISABLED",
+          pill: "Interlock Tripped",
+          sub: "IR optical contact lost. Engine starter disabled until helmet lock is re-engaged.",
+          type: "warning"
+        });
+        updateVirtualLCD("WEAR HELMET &   ", "FASTEN STRAP!   ");
+      } else if (targetState === 'alcohol') {
+        state.alcohol = true;
+        state.engine = false;
+        applySystemView({
+          title: "ALCOHOL SPIKE DETECTED · ENGINE LOCKED",
+          pill: "Zero Tolerance Breach",
+          sub: "Breathalyzer raw ADC reading (480) exceeded 350 cutoff threshold. Engine locked.",
+          type: "danger"
+        });
+        updateVirtualLCD("ALCOHOL DETECTED", "ENGINE: LOCKED! ");
+      } else if (targetState === 'drowsy') {
+        state.drowsy = true;
+        applySystemView({
+          title: "MICROSLEEP DETECTED · BUZZER ENGAGED",
+          pill: "Fatigue Warning",
+          sub: "PERCLOS closure index 24.1% exceeds threshold. Audio acoustic vibration pulse active.",
+          type: "warning"
+        });
+        updateVirtualLCD("DROWSINESS ALERT", "TAKE A BREAK!   ");
+      }
+      refreshSensorCards();
+    }
+
+    function applySystemView(cfg) {
+      const banner = document.getElementById('master-hero-banner');
+      const tag = document.getElementById('banner-status-tag');
+      const pill = document.getElementById('banner-mode-pill');
+      const sub = document.getElementById('banner-subtitle');
+      const icon = document.getElementById('status-icon');
+      const bubble = document.getElementById('status-icon-bubble');
+      const glow = document.getElementById('banner-glow-bg');
+
+      tag.textContent = cfg.title;
+      pill.textContent = cfg.pill;
+      sub.textContent = cfg.sub;
+
+      if (cfg.type === 'safe') {
+        bubble.className = "w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-secondary-fixed/50 flex items-center justify-center shrink-0 shadow-lg";
+        icon.className = "material-symbols-outlined text-[36px] sm:text-[44px] text-secondary";
+        icon.textContent = "verified_user";
+        glow.className = "absolute -top-32 -right-32 w-96 h-96 rounded-full bg-secondary/15 blur-3xl pointer-events-none";
+      } else if (cfg.type === 'warning') {
+        bubble.className = "w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-surface-container-highest flex items-center justify-center shrink-0 shadow-lg";
+        icon.className = "material-symbols-outlined text-[36px] sm:text-[44px] text-tertiary-container";
+        icon.textContent = "warning";
+        glow.className = "absolute -top-32 -right-32 w-96 h-96 rounded-full bg-tertiary-container/15 blur-3xl pointer-events-none";
+      } else if (cfg.type === 'danger') {
+        bubble.className = "w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-tertiary-fixed flex items-center justify-center shrink-0 shadow-lg";
+        icon.className = "material-symbols-outlined text-[36px] sm:text-[44px] text-tertiary";
+        icon.textContent = "gpp_bad";
+        glow.className = "absolute -top-32 -right-32 w-96 h-96 rounded-full bg-tertiary/20 blur-3xl pointer-events-none";
+      }
+    }
+
+    function refreshSensorCards() {
+      // 1. Helmet
+      const badgeH = document.getElementById('badge-helmet');
+      const valH = document.getElementById('text-helmet-val');
+      const descH = document.getElementById('desc-helmet');
+      const btnH = document.getElementById('btn-toggle-helmet');
+      if (state.helmet) {
+        badgeH.className = "px-3.5 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm";
+        badgeH.innerHTML = '<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> FASTENED';
+        valH.textContent = "Engaged";
+        valH.className = "text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mt-0.5";
+        descH.textContent = "IR beam uninterrupted · Head contact capacitive lock confirmed.";
+        btnH.className = "w-14 h-7.5 bg-secondary rounded-full p-1 transition-all duration-300 focus:outline-none flex items-center justify-end shadow-inner cursor-pointer";
+      } else {
+        badgeH.className = "px-3.5 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm";
+        badgeH.innerHTML = '<span class="w-2 h-2 rounded-full bg-tertiary"></span> REMOVED';
+        valH.textContent = "Disengaged";
+        valH.className = "text-2xl sm:text-3xl font-extrabold text-tertiary tracking-tight mt-0.5";
+        descH.textContent = "IR beam broken · Helmet removed from rider head.";
+        btnH.className = "w-14 h-7.5 bg-surface-container-highest rounded-full p-1 transition-all duration-300 focus:outline-none flex items-center justify-start shadow-inner cursor-pointer";
+      }
+
+      // 2. Alcohol
+      const badgeA = document.getElementById('badge-alcohol');
+      const valA = document.getElementById('text-alcohol-val');
+      const descA = document.getElementById('desc-alcohol');
+      if (!state.alcohol) {
+        badgeA.className = "px-3.5 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm";
+        badgeA.innerHTML = '<span class="w-2 h-2 rounded-full bg-primary"></span> 0.00% BAC (SOBER)';
+        valA.textContent = "142 rawADC";
+        valA.className = "text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mt-0.5";
+        descA.textContent = "Zero-tolerance threshold 350. Clean alcohol-free exhaled breath detected.";
+      } else {
+        badgeA.className = "px-3.5 py-1.5 rounded-full bg-tertiary-container text-on-tertiary-container text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm";
+        badgeA.innerHTML = '<span class="w-2 h-2 rounded-full bg-surface-container-lowest"></span> ALCOHOL SPIKE!';
+        valA.textContent = "486 rawADC";
+        valA.className = "text-2xl sm:text-3xl font-extrabold text-tertiary tracking-tight mt-0.5";
+        descA.textContent = "Threshold 350 exceeded! Solenoid lock disabled automatically.";
+      }
+
+      // 3. Drowsy
+      const badgeB = document.getElementById('badge-blink');
+      const valB = document.getElementById('text-blink-val');
+      const descB = document.getElementById('desc-blink');
+      const buzzDot = document.getElementById('buzzer-dot');
+      const buzzTxt = document.getElementById('buzzer-text');
+      if (!state.drowsy) {
+        badgeB.className = "px-3.5 py-1.5 rounded-full bg-surface-container-high text-on-surface text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm";
+        badgeB.innerHTML = '<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> AWAKE & FOCUSED';
+        valB.innerHTML = '4.2% <span class="text-sm font-normal text-outline">(16 blinks/m)</span>';
+        descB.textContent = "Normal eyelid closure velocity. Alertness rating high & consistent.";
+        buzzDot.className = "w-2.5 h-2.5 rounded-full bg-secondary";
+        buzzTxt.textContent = "STANDBY (0 dB)";
+      } else {
+        badgeB.className = "px-3.5 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm";
+        badgeB.innerHTML = '<span class="w-2 h-2 rounded-full bg-tertiary"></span> MICROSLEEP ALERT!';
+        valB.innerHTML = '24.1% <span class="text-sm font-bold text-tertiary">(Alert &gt; 18%)</span>';
+        descB.textContent = "Eyelids closed for 2.4 seconds! Piezo acoustic buzzer activated.";
+        buzzDot.className = "w-2.5 h-2.5 rounded-full bg-tertiary animate-ping";
+        buzzTxt.textContent = "BUZZER ACTIVE (85 dB)";
+      }
+
+      // 4. Relay & Engine
+      const badgeR = document.getElementById('badge-relay');
+      const valR = document.getElementById('text-relay-val');
+      const descR = document.getElementById('desc-relay');
+      const rDot = document.getElementById('relay-pulse-dot');
+      const rTxt = document.getElementById('relay-text');
+      const vTxt = document.getElementById('battery-voltage-text');
+
+      if (state.engine && state.helmet && !state.alcohol) {
+        badgeR.className = "px-3.5 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm";
+        badgeR.innerHTML = '<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> IGNITION ON';
+        valR.textContent = "ENERGIZED";
+        valR.className = "text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mt-0.5";
+        descR.textContent = "Dual optoisolator gate saturated. Starter circuit continuity complete.";
+        rDot.className = "w-2.5 h-2.5 rounded-full bg-secondary animate-ping";
+        rTxt.className = "text-sm text-secondary font-extrabold";
+        rTxt.textContent = "LIVE (ON)";
+        vTxt.textContent = "12.4";
+      } else {
+        badgeR.className = "px-3.5 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold tracking-wider flex items-center gap-2 shadow-sm";
+        badgeR.innerHTML = '<span class="w-2 h-2 rounded-full bg-tertiary"></span> CUT OFF';
+        valR.textContent = "LOCKED";
+        valR.className = "text-2xl sm:text-3xl font-extrabold text-tertiary tracking-tight mt-0.5";
+        descR.textContent = "Solenoid de-energized. Circuit interrupted to prevent accident.";
+        rDot.className = "w-2.5 h-2.5 rounded-full bg-tertiary";
+        rTxt.className = "text-sm text-tertiary font-extrabold";
+        rTxt.textContent = "CUT OFF (LOCK)";
+        vTxt.textContent = "0.0";
+      }
+    }
+
+    // Viva Cases
+    function runVivaCase(caseNum) {
+      if (caseNum === 1) setSystemState('safe');
+      if (caseNum === 2) setSystemState('helmet-off');
+      if (caseNum === 3) setSystemState('alcohol');
+      if (caseNum === 4) setSystemState('drowsy');
+      if (caseNum === 5) triggerCrashModal();
+    }
+
+    // Crash Modal Logic
+    function triggerCrashModal() {
+      const modal = document.getElementById('crash-emergency-modal');
+      modal.classList.remove('hidden');
+      state.countdownRemaining = 20;
+      updateCountdownVisual();
+
+      if (state.countdownTimer) clearInterval(state.countdownTimer);
+      state.countdownTimer = setInterval(() => {
+        state.countdownRemaining -= 1;
+        updateCountdownVisual();
+        if (state.countdownRemaining <= 0) {
+          clearInterval(state.countdownTimer);
+          dispatchSOSNow();
+        }
+      }, 1000);
+
+      // Kill Engine on Crash
+      state.engine = false;
+      refreshSensorCards();
+      updateVirtualLCD("CRASH DETECTED! ", "SOS DISPATCHING ");
+    }
+
+    function updateCountdownVisual() {
+      const num = document.getElementById('countdown-number');
+      const circle = document.getElementById('countdown-circle-svg');
+      num.textContent = state.countdownRemaining;
+      const progress = (20 - state.countdownRemaining) / 20;
+      const offset = 264 * progress;
+      circle.style.strokeDashoffset = offset;
+    }
+
+    function closeCrashModal() {
+      if (state.countdownTimer) clearInterval(state.countdownTimer);
+      document.getElementById('crash-emergency-modal').classList.add('hidden');
+    }
+
+    function cancelSOSAlert() {
+      closeCrashModal();
+      setSystemState('safe');
+      appendLedger("SOS False Alarm Cancelled by Rider", "Rider manual override · System reset to SAFE", "NORMAL");
+    }
+
+    function dispatchSOSNow() {
+      closeCrashModal();
+      const phoneInput = document.getElementById('emergency-phone-input');
+      const contactPhone = phoneInput ? phoneInput.value.trim() : '+91 98765-43210';
+      const lat = (window.liveGPS && window.liveGPS.lat) ? window.liveGPS.lat : 12.9716;
+      const lon = (window.liveGPS && window.liveGPS.lon) ? window.liveGPS.lon : 77.5946;
+      const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+
+      appendLedger("HIGH-G IMPACT: SOS PACKET DISPATCHED", `Emergency SMS & EMS 108 triggered. GPS: ${lat.toFixed(5)}, ${lon.toFixed(5)}`, "CRITICAL");
+
+      if (window.appSocket) {
+        window.appSocket.emit('dispatch-sos', {
+          lat: lat,
+          lon: lon,
+          mapsUrl: mapsUrl,
+          gForce: 4.35,
+          emergencyContact: contactPhone,
+          timestamp: Date.now()
+        });
+      }
+
+      showSOSToast(lat, lon, mapsUrl, contactPhone, "Cloud SMS Broadcast Active");
+    }
+
+    function showSOSToast(lat, lon, mapsUrl, phone, statusText) {
+      const toast = document.getElementById('sos-dispatch-toast');
+      if (!toast) return;
+      toast.classList.remove('hidden');
+      const toastMsg = document.getElementById('sos-toast-msg');
+      const toastLink = document.getElementById('sos-toast-link');
+      if (toastMsg) toastMsg.textContent = `${statusText} to ${phone} · GPS (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
+      if (toastLink) toastLink.href = mapsUrl;
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 12000);
+    }
+
+    function appendLedger(title, desc, tag) {
+      const container = document.getElementById('blackbox-ledger-container');
+      const now = new Date();
+      const timeStr = now.toISOString().substr(11, 12);
+      const isCrit = tag === 'CRITICAL';
+      const item = document.createElement('div');
+      item.className = "p-3.5 rounded-2xl bg-surface-container-low flex items-center justify-between gap-4 animate-in fade-in";
+      item.innerHTML = `
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full ${isCrit ? 'bg-tertiary' : 'bg-secondary'}"></span>
+          <div class="flex flex-col">
+            <span class="font-label-sm text-label-sm font-semibold text-on-surface">${title}</span>
+            <span class="font-body-sm text-body-sm text-outline">${desc}</span>
+          </div>
+        </div>
+        <div class="text-right shrink-0">
+          <span class="px-2 py-0.5 rounded-full ${isCrit ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-secondary-fixed text-on-secondary-fixed'} font-label-sm text-label-sm font-bold">${tag}</span>
+          <div class="font-telemetry-unit text-telemetry-unit text-outline mt-1">${timeStr}</div>
+        </div>
+      `;
+      container.prepend(item);
+    }
+
+    function clearLedgerLog() {
+      const container = document.getElementById('blackbox-ledger-container');
+      container.innerHTML = '<div class="p-3 text-center text-outline font-label-sm text-label-sm">Simulation cache flushed. New events will log automatically.</div>';
+    }
+
+    // Toggle Handlers
+    document.getElementById('btn-toggle-helmet').addEventListener('click', () => {
+      state.helmet = !state.helmet;
+      if (!state.helmet) state.engine = false;
+      refreshSensorCards();
+    });
+
+    document.getElementById('btn-toggle-alcohol').addEventListener('click', () => {
+      state.alcohol = !state.alcohol;
+      if (state.alcohol) state.engine = false;
+      refreshSensorCards();
+    });
+
+    document.getElementById('btn-toggle-blink').addEventListener('click', () => {
+      state.drowsy = !state.drowsy;
+      refreshSensorCards();
+    });
+
+    document.getElementById('toggle-engine-btn').addEventListener('click', () => {
+      state.engine = !state.engine;
+      refreshSensorCards();
+    });
+
+    document.getElementById('btn-manual-cutoff').addEventListener('click', () => {
+      state.engine = false;
+      refreshSensorCards();
+      appendLedger("Manual Emergency Interlock Tripped", "Remote handlebar killswitch actuated", "CRITICAL");
+    });
+
+    // Pitch & Roll Sliders dispatching 3D telemetry events
+    const inputPitch = document.getElementById('input-pitch');
+    const inputRoll = document.getElementById('input-roll');
+    const lblPitch = document.getElementById('slider-pitch-label');
+    const lblRoll = document.getElementById('slider-roll-label');
+    const hudPitch = document.getElementById('hud-pitch-val');
+    const hudRoll = document.getElementById('hud-roll-val');
+
+    function emitAttitude() {
+      const p = parseFloat(inputPitch.value);
+      const r = parseFloat(inputRoll.value);
+      lblPitch.textContent = (p >= 0 ? '+' : '') + p.toFixed(1) + '°';
+      lblRoll.textContent = (r >= 0 ? '+' : '') + r.toFixed(1) + '°';
+      hudPitch.textContent = (p >= 0 ? '+' : '') + p.toFixed(1) + '°';
+      hudRoll.textContent = (r >= 0 ? '+' : '') + r.toFixed(1) + '°';
+
+      window.dispatchEvent(new CustomEvent('aegis-telemetry-update', {
+        detail: { pitch: p, roll: r }
+      }));
+    }
+
+    inputPitch.addEventListener('input', emitAttitude);
+    inputRoll.addEventListener('input', emitAttitude);
+
+    function resetAttitudeSliders() {
+      inputPitch.value = 0.0;
+      inputRoll.value = 0.0;
+      emitAttitude();
+    }
+
+    // Oscilloscope Canvas Rendering
+    const canvas = document.getElementById('motion-oscilloscope');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let waveOffset = 0;
+
+    function resizeCanvas() {
+      width = canvas.parentElement.clientWidth;
+      height = canvas.parentElement.clientHeight;
+      canvas.width = width * window.devicePixelRatio;
+      canvas.height = height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function renderOscilloscope() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Grid baseline
+      ctx.strokeStyle = '#e2e7ff';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let y = 30; y < height; y += 40) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+      }
+      ctx.stroke();
+
+      // Crash Threshold line (3.2G Red dashed)
+      ctx.strokeStyle = '#ac0031';
+      ctx.setLineDash([6, 6]);
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(0, 25);
+      ctx.lineTo(width, 25);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Baseline 1.0G Earth Gravity
+      ctx.strokeStyle = '#737686';
+      ctx.setLineDash([3, 3]);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, height / 2);
+      ctx.lineTo(width, height / 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Draw Wave: Dynamic Vector G-Force (Emerald)
+      ctx.strokeStyle = '#006c4a';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for (let x = 0; x < width; x += 4) {
+        const y = height / 2 + Math.sin((x + waveOffset) * 0.03) * 18 + Math.cos((x + waveOffset * 0.7) * 0.05) * 8;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Draw Wave: Z-Axis Heave (Primary Blue)
+      ctx.strokeStyle = '#004ac6';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let x = 0; x < width; x += 4) {
+        const y = height / 2 + Math.sin((x + waveOffset * 1.2) * 0.02) * 12;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      waveOffset += 2;
+      requestAnimationFrame(renderOscilloscope);
+    }
+    renderOscilloscope();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest py-8 shadow-[0_-1px_8px_rgba(0,0,0,0.02)] border-t border-surface-container-high/40"><div class="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 flex flex-col md:flex-row items-center justify-between gap-4"><div class="flex items-center gap-2.5 text-on-surface-variant font-medium text-xs sm:text-sm"><span class="material-symbols-outlined text-primary text-[18px]">memory</span><span>Smart Helmet &amp; Motorcycle Safety Control Platform</span></div><div class="text-xs sm:text-sm text-outline font-medium">© 2025 AegisHelm IoT Telemetry · Intelligent Motorcycle Safety System</div></div></footer>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  // Live Zero-Hardware GPS Telemetry Engine
+  window.liveGPS = {
+    lat: 12.9716,
+    lon: 77.5946,
+    accuracy: 15,
+    speed: 0,
+    mapsUrl: "https://maps.google.com/?q=12.9716,77.5946",
+    mapInstance: null,
+    markerInstance: null
+  };
+
+  // Virtual 16x2 I2C LCD Controller
+  window.lcdState = {
+    theme: 'blue',
+    line1: "HELMET: SAFE OK ",
+    line2: "ENGINE: STARTED "
+  };
+
+  function updateVirtualLCD(line1, line2) {
+    if (line1 !== undefined && line1 !== null) {
+      window.lcdState.line1 = (line1.toString() + "                ").substring(0, 16);
+    }
+    if (line2 !== undefined && line2 !== null) {
+      window.lcdState.line2 = (line2.toString() + "                ").substring(0, 16);
+    }
+
+    const el1 = document.getElementById('virtual-lcd-line1');
+    const el2 = document.getElementById('virtual-lcd-line2');
+    if (el1) el1.textContent = window.lcdState.line1;
+    if (el2) el2.textContent = window.lcdState.line2;
+
+    const commLed = document.getElementById('lcd-comm-led');
+    if (commLed) {
+      commLed.classList.add('bg-white');
+      setTimeout(() => commLed.classList.remove('bg-white'), 120);
+    }
+  }
+
+  function toggleLcdColor() {
+    const bezel = document.getElementById('lcd-screen-bezel');
+    const text = document.getElementById('lcd-text-container');
+    const btnText = document.getElementById('lcd-theme-btn-text');
+    if (!bezel || !text) return;
+
+    if (window.lcdState.theme === 'blue') {
+      window.lcdState.theme = 'green';
+      bezel.className = "rounded-xl p-4 sm:p-5 bg-gradient-to-b from-[#0f3d1b] to-[#05210c] border-2 border-[#156e2f] shadow-[inset_0_2px_12px_rgba(0,0,0,0.8),0_0_20px_rgba(34,197,94,0.25)] relative overflow-hidden transition-all duration-300";
+      text.style.color = "#dcfce7";
+      text.style.textShadow = "0 0 10px rgba(34, 197, 94, 0.8), 0 0 20px rgba(22, 163, 74, 0.4)";
+      if (btnText) btnText.textContent = "Switch to Classic Blue";
+    } else {
+      window.lcdState.theme = 'blue';
+      bezel.className = "rounded-xl p-4 sm:p-5 bg-gradient-to-b from-[#00286b] to-[#001744] border-2 border-[#00388c] shadow-[inset_0_2px_12px_rgba(0,0,0,0.8),0_0_20px_rgba(0,149,255,0.25)] relative overflow-hidden transition-all duration-300";
+      text.style.color = "#e0f7ff";
+      text.style.textShadow = "0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 149, 255, 0.4)";
+      if (btnText) btnText.textContent = "Switch to Emerald Green";
+    }
+  }
+
+  function initLiveGPSMap() {
+    const mapEl = document.getElementById('live-gps-map');
+    if (!mapEl || typeof L === 'undefined') return;
+
+    if (!window.liveGPS.mapInstance) {
+      window.liveGPS.mapInstance = L.map('live-gps-map', {
+        zoomControl: false,
+        attributionControl: false
+      }).setView([window.liveGPS.lat, window.liveGPS.lon], 15);
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+      }).addTo(window.liveGPS.mapInstance);
+
+      // Custom motorcycle marker
+      const bikeIcon = L.divIcon({
+        className: 'custom-bike-marker',
+        html: '<div style="width:28px;height:28px;border-radius:9999px;background:#004ac6;color:white;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,74,198,0.5);border:2px solid white;"><span class="material-symbols-outlined" style="font-size:16px;">two_wheeler</span></div>',
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+
+      window.liveGPS.markerInstance = L.marker([window.liveGPS.lat, window.liveGPS.lon], { icon: bikeIcon })
+        .addTo(window.liveGPS.mapInstance)
+        .bindPopup("<strong>AegisHelm Rider</strong><br>Live Telemetry Linked");
+    }
+  }
+
+  function updateGPSDisplay(lat, lon, accuracy, speed) {
+    window.liveGPS.lat = lat;
+    window.liveGPS.lon = lon;
+    window.liveGPS.accuracy = accuracy || 15;
+    window.liveGPS.speed = speed || 0;
+    window.liveGPS.mapsUrl = `https://maps.google.com/?q=${lat},${lon}`;
+
+    const coordsEl = document.getElementById('live-gps-coords');
+    const crashCoordsEl = document.getElementById('crash-gps-coords');
+    const accEl = document.getElementById('gps-accuracy-text');
+    const gmapsLink = document.getElementById('live-gmaps-link');
+
+    if (coordsEl) coordsEl.textContent = `Lat: ${lat.toFixed(5)}° · Lon: ${lon.toFixed(5)}°`;
+    if (crashCoordsEl) crashCoordsEl.textContent = `Live GPS: Lat ${lat.toFixed(5)}°, Lon ${lon.toFixed(5)}°`;
+    if (accEl) accEl.textContent = `Accuracy: ±${Math.round(window.liveGPS.accuracy)}m · Device GPS Linked`;
+    if (gmapsLink) gmapsLink.href = window.liveGPS.mapsUrl;
+
+    if (window.liveGPS.mapInstance && window.liveGPS.markerInstance) {
+      window.liveGPS.markerInstance.setLatLng([lat, lon]);
+      window.liveGPS.mapInstance.panTo([lat, lon]);
+    }
+  }
+
+  function requestDeviceGPS() {
+    if (!navigator.geolocation) {
+      console.warn("Geolocation API not available.");
+      return;
+    }
+    const statusText = document.getElementById('gps-status-text');
+    if (statusText) statusText.textContent = "LOCKING...";
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        const acc = pos.coords.accuracy;
+        const spd = pos.coords.speed ? (pos.coords.speed * 3.6) : 0;
+        updateGPSDisplay(lat, lon, acc, spd);
+        if (statusText) statusText.textContent = "LIVE GPS FIX";
+      },
+      (err) => {
+        console.warn("Device GPS fallback to regional coords:", err.message);
+        if (statusText) statusText.textContent = "SIMULATED FIX";
+      },
+      { enableHighAccuracy: true, timeout: 8000 }
+    );
+
+    navigator.geolocation.watchPosition(
+      (pos) => {
+        updateGPSDisplay(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy, pos.coords.speed ? pos.coords.speed * 3.6 : 0);
+      },
+      null,
+      { enableHighAccuracy: true }
+    );
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(initLiveGPSMap, 400);
+    requestDeviceGPS();
+  });
+
+  if (typeof io !== 'undefined') {
+    const socket = io();
+    window.appSocket = socket;
+
+    socket.on('connect', () => {
+      console.log('Connected to AegisHelm IoT Gateway');
+    });
+
+    socket.on('telemetry', (t) => {
+      state.helmet = (t.helmet === 1);
+      state.alcohol = (t.alcohol === 1);
+      state.drowsy = (t.drowsy === 1);
+      state.engine = (t.relay === 1);
+      refreshSensorCards();
+
+      if (t.lcd1 || t.lcd2) {
+        updateVirtualLCD(t.lcd1, t.lcd2);
+      }
+
+      if (t.crash === 1) {
+        triggerCrashModal();
+      }
+
+      if (t.pitch !== undefined && t.roll !== undefined) {
+        const p = parseFloat(t.pitch);
+        const r = parseFloat(t.roll);
+        const hp = document.getElementById('hud-pitch-val');
+        const hr = document.getElementById('hud-roll-val');
+        const sp = document.getElementById('slider-pitch-label');
+        const sr = document.getElementById('slider-roll-label');
+        const ip = document.getElementById('input-pitch');
+        const ir = document.getElementById('input-roll');
+        if (hp) hp.textContent = (p >= 0 ? '+' : '') + p.toFixed(1) + '°';
+        if (hr) hr.textContent = (r >= 0 ? '+' : '') + r.toFixed(1) + '°';
+        if (sp) sp.textContent = (p >= 0 ? '+' : '') + p.toFixed(1) + '°';
+        if (sr) sr.textContent = (r >= 0 ? '+' : '') + r.toFixed(1) + '°';
+        if (ip) ip.value = p;
+        if (ir) ir.value = r;
+
+        window.dispatchEvent(new CustomEvent('aegis-telemetry-update', {
+          detail: { pitch: p, roll: r }
+        }));
+      }
+    });
+
+    socket.on('sos-dispatched-confirmation', (conf) => {
+      console.log('🚨 SOS Dispatch Confirmation Received:', conf);
+      showSOSToast(conf.lat, conf.lon, conf.mapsUrl, conf.emergencyContact, `Delivered via ${conf.provider}`);
+    });
+
+    socket.on('system-status', (status) => {
+      const badge = document.getElementById('hardware-status-badge');
+      const text = document.getElementById('hardware-status-text');
+      const ping = document.getElementById('hardware-status-ping');
+      const dot = document.getElementById('hardware-status-dot');
+      if (!text) return;
+
+      if (status.mode === 'HARDWARE' && status.port) {
+        text.textContent = `HARDWARE LINK: ${status.port} (9600 Baud)`;
+        text.className = "font-label-sm text-xs font-bold text-secondary";
+        if (badge) {
+          badge.className = "hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full bg-secondary-fixed/30 border border-secondary/50 shadow-sm transition-all cursor-pointer group hover:bg-secondary-fixed/50";
+        }
+        if (ping) ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75";
+        if (dot) dot.className = "relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary";
+      } else if (status.paused) {
+        text.textContent = `UPLOAD MODE: Port Released (${status.pauseRemaining || 30}s)`;
+        text.className = "font-label-sm text-xs font-bold text-tertiary";
+        if (badge) {
+          badge.className = "hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full bg-tertiary-fixed/30 border border-tertiary/50 shadow-sm transition-all cursor-pointer group hover:bg-tertiary-fixed/50";
+        }
+        if (ping) ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75";
+        if (dot) dot.className = "relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary";
+      } else {
+        text.textContent = "SIMULATOR ACTIVE · Auto-scanning USB...";
+        text.className = "font-label-sm text-xs font-semibold text-on-surface-variant";
+        if (badge) {
+          badge.className = "hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-container-low border border-surface-container-high/40 transition-all cursor-pointer group hover:bg-surface-container";
+        }
+        if (ping) ping.className = "hidden";
+        if (dot) dot.className = "relative inline-flex rounded-full h-2.5 w-2.5 bg-outline/60";
+      }
+    });
+
+    socket.on('ports-list', (ports) => {
+      renderPortsList(ports);
+    });
+
+    const origToggle = document.getElementById('toggle-engine-btn');
+    if (origToggle) {
+      origToggle.addEventListener('click', () => {
+        socket.emit('toggle-engine');
+      });
+    }
+  }
+
+  function openSerialModal() {
+    const modal = document.getElementById('serial-modal');
+    if (modal) modal.classList.remove('hidden');
+    if (window.appSocket) {
+      window.appSocket.emit('get-ports');
+    }
+  }
+
+  function closeSerialModal() {
+    const modal = document.getElementById('serial-modal');
+    if (modal) modal.classList.add('hidden');
+  }
+
+  function pauseSerialForUpload() {
+    if (window.appSocket) {
+      window.appSocket.emit('release-port', 35000);
+    }
+    closeSerialModal();
+  }
+
+  function selectComPort(portPath) {
+    if (window.appSocket) {
+      window.appSocket.emit('select-port', portPath);
+    }
+    closeSerialModal();
+  }
+
+  function renderPortsList(ports) {
+    const listEl = document.getElementById('serial-ports-list');
+    if (!listEl) return;
+    if (!ports || ports.length === 0) {
+      listEl.innerHTML = '<div class="p-4 rounded-xl bg-surface-container-low text-center text-outline text-xs">No USB Serial / COM devices currently detected. Plug in your Arduino via USB.</div>';
+      return;
+    }
+    listEl.innerHTML = ports.map(p => `
+      <div class="p-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container border border-surface-container-high flex items-center justify-between gap-3">
+        <div class="flex flex-col">
+          <span class="font-bold text-sm text-on-surface">${p.path}</span>
+          <span class="text-xs text-outline">${p.friendlyName || p.manufacturer || 'Serial Device'}</span>
+        </div>
+        <button onclick="selectComPort('${p.path}')" class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary text-xs font-bold hover:bg-primary-container transition-all cursor-pointer">
+          Connect
+        </button>
+      </div>
+    `).join('');
+  }
+</script>
+
+<!-- Hardware COM Port & Firmware Upload Manager Modal -->
+<div id="serial-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden animate-in fade-in duration-200">
+  <div class="w-full max-w-lg bg-surface-container-lowest rounded-3xl p-6 sm:p-8 shadow-2xl border border-surface-container-high space-y-6">
+    <div class="flex items-center justify-between pb-3 border-b border-surface-container-high">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-[24px]">usb</span>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg text-on-surface">Hardware Serial Manager</h3>
+          <p class="text-xs text-outline">Arduino USB COM Port &amp; Flashing Controls</p>
+        </div>
+      </div>
+      <button onclick="closeSerialModal()" class="w-8 h-8 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant flex items-center justify-center cursor-pointer">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    </div>
+
+    <!-- Upload Helper Action -->
+    <div class="p-4 rounded-2xl bg-tertiary-fixed/20 border border-tertiary/30 space-y-2">
+      <div class="flex items-center gap-2 text-tertiary font-bold text-sm">
+        <span class="material-symbols-outlined text-[20px]">upload_file</span>
+        <span>Flashing Arduino Firmware?</span>
+      </div>
+      <p class="text-xs text-on-surface-variant leading-relaxed">
+        Windows locks COM ports to one program at a time. Click below to temporarily release the port for 35 seconds so the Arduino IDE can upload without "Access Denied" errors.
+      </p>
+      <button onclick="pauseSerialForUpload()" class="mt-2 w-full py-2.5 rounded-xl bg-tertiary text-on-tertiary font-bold text-xs uppercase tracking-wider hover:bg-tertiary/90 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm">
+        <span class="material-symbols-outlined text-[18px]">lock_open</span>
+        <span>Release COM Port for Upload (35s)</span>
+      </button>
+    </div>
+
+    <!-- Detected Ports -->
+    <div class="space-y-2.5">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold uppercase tracking-wider text-outline">Detected USB / COM Ports</span>
+        <button onclick="if(window.appSocket) window.appSocket.emit('get-ports')" class="text-xs text-primary hover:underline flex items-center gap-1 font-semibold cursor-pointer">
+          <span class="material-symbols-outlined text-[14px]">refresh</span> Refresh
+        </button>
+      </div>
+      <div id="serial-ports-list" class="space-y-2 max-h-48 overflow-y-auto">
+        <div class="p-3 text-center text-xs text-outline">Loading port list...</div>
+      </div>
+    </div>
+
+    <div class="pt-2 flex justify-end">
+      <button onclick="closeSerialModal()" class="px-5 py-2.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-bold transition-all cursor-pointer">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Emergency SOS Dispatch Toast Banner -->
+<div id="sos-dispatch-toast" class="fixed top-24 right-6 z-50 max-w-md bg-tertiary text-on-tertiary p-5 rounded-3xl shadow-2xl border border-white/20 hidden animate-in slide-in-from-top duration-300">
+  <div class="flex items-start gap-3.5">
+    <div class="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
+      <span class="material-symbols-outlined text-[24px]">crisis_alert</span>
+    </div>
+    <div class="flex flex-col space-y-1">
+      <span class="font-bold text-sm uppercase tracking-wide">🚨 Emergency SOS Broadcast!</span>
+      <p class="text-xs leading-relaxed text-white/90" id="sos-toast-msg">Emergency SMS &amp; GPS coordinates broadcasted to EMS 108 &amp; Emergency Contacts.</p>
+      <div class="pt-1.5 flex items-center gap-3">
+        <a id="sos-toast-link" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-full bg-white text-tertiary font-bold text-xs hover:bg-white/90 transition-all flex items-center gap-1 shadow-sm">
+          <span>View Pin in Google Maps</span>
+          <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+        </a>
+        <button onclick="document.getElementById('sos-dispatch-toast').classList.add('hidden')" class="text-xs text-white/80 hover:text-white underline cursor-pointer">Dismiss</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,19 @@
+{
+  "name": "stitch-aegishelm-server",
+  "version": "1.0.0",
+  "description": "Full-stack IoT Backend & Web Server for Stitch AegisHelm Motorcycle Dashboard",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  },
+  "optionalDependencies": {
+    "serialport": "^12.0.0",
+    "@serialport/parser-readline": "^12.0.0"
+  }
+}
