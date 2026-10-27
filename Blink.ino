@@ -19,6 +19,7 @@ const int ALCOHOL_THRESHOLD = 450;
 // MPU-6050 I2C Address (default is 0x68)
 const int MPU_ADDR = 0x68;
 bool mpuAvailable = false;
+float currentGForce = 1.0;
 
 // Initialize RadioHead ASK driver (Speed: 2000 bps, TX on Pin 12)
 RH_ASK rf_driver(2000, 11, RF_TX_PIN);
@@ -32,10 +33,10 @@ void initMPU() {
 
   if (error == 0) {
     mpuAvailable = true;
-    Serial.println("MPU-6050 Accelerometer initialized at 0x68.");
+    Serial.println(F("[MPU-6050] Initialized successfully at I2C address 0x68."));
   } else {
     mpuAvailable = false;
-    Serial.println("Note: MPU-6050 not detected at 0x68 (proceeding with IR & MQ3).");
+    Serial.println(F("[MPU-6050] Not detected at 0x68 (Dual IR + MQ-3 active)."));
   }
 }
 
@@ -54,12 +55,10 @@ bool checkAccident() {
   int16_t az = Wire.read() << 8 | Wire.read();
 
   // Convert raw values to g's (scale is 16384 LSB/g)
-  float totalAcc = sqrt((float)ax * ax + (float)ay * ay + (float)az * az) / 16384.0;
+  currentGForce = sqrt((float)ax * ax + (float)ay * ay + (float)az * az) / 16384.0;
 
   // Impact threshold: > 2.6g or severe free-fall (< 0.25g) indicates a crash
-  if (totalAcc > 2.6 || totalAcc < 0.25) {
-    Serial.print("ACCIDENT DETECTED! G-Force: ");
-    Serial.println(totalAcc);
+  if (currentGForce > 2.6 || currentGForce < 0.25) {
     return true;
   }
   return false;
@@ -67,7 +66,7 @@ bool checkAccident() {
 
 void setup() {
   Serial.begin(9600);
-  delay(200);
+  delay(150);
 
   // Configure digital I/O
   pinMode(IR_SENSOR_1_PIN, INPUT_PULLUP);
@@ -83,31 +82,32 @@ void setup() {
   delay(900);
   digitalWrite(LED_PIN, LOW);
 
-  Serial.println("==================================================");
-  Serial.println("Arduino 1 (Helmet Transmitter) Running");
-  Serial.println("Pins: IR1->D2 | IR2->D3 | MQ3->A0 | Buzzer->D8 | Red LED->D9 | RF->D12 | MPU->A4/A5");
-  Serial.print("Alcohol Threshold: ");
+  Serial.println(F("\n================================================================================"));
+  Serial.println(F("            AEGISHELM SMART HELMET SYSTEM - TRANSMITTER (COM5)                 "));
+  Serial.println(F("================================================================================"));
+  Serial.println(F("PINS: IR1->D2 | IR2->D3 | MQ3->A0 | Buzzer->D8 | Red LED->D9 | RF TX->D12 | MPU->A4/A5"));
+  Serial.print(F("Alcohol Trigger Threshold: "));
   Serial.println(ALCOHOL_THRESHOLD);
-  Serial.println("==================================================");
 
   // Initialize MPU-6050
   initMPU();
 
   // Initialize RF Transmitter
   if (!rf_driver.init()) {
-    Serial.println("Warning: RF Transmitter init failed!");
+    Serial.println(F("ERROR: RF Transmitter failed on Pin D12!"));
   } else {
-    Serial.println("RF Transmitter Initialized on Pin D12.");
+    Serial.println(F("RF Transmitter Ready on Pin D12 at 2000 bps."));
   }
 
-  Serial.println("TRANSMITTER ACTIVE. STREAMING DATA BELOW:");
-  Serial.println("==================================================");
+  Serial.println(F("--------------------------------------------------------------------------------"));
+  Serial.println(F("LIVE TELEMETRY STREAM STARTED:"));
+  Serial.println(F("================================================================================"));
 }
 
 void loop() {
   digitalWrite(BUZZER_PIN, LOW);
 
-  // 1. Read Sensors
+  // 1. Read All Input Sensors
   int ir1State = digitalRead(IR_SENSOR_1_PIN);
   int ir2State = digitalRead(IR_SENSOR_2_PIN);
   int alcoholLevel = analogRead(MQ3_ANALOG_PIN);
@@ -120,11 +120,11 @@ void loop() {
   bool alcoholDetected = (alcoholLevel >= ALCOHOL_THRESHOLD);
 
   // 2. Determine System State & Priority
-  // Priority: ACCIDENT > ALCOHOL > NO_HELMET > SAFE
+  // Priority: CRASH > ALCOHOL > NO_HELMET > SAFE
   const char *rfMsg = "NO_HELMET";
 
   if (accident) {
-    rfMsg = "ACCIDENT";
+    rfMsg = "CRASH";
   } else if (alcoholDetected) {
     rfMsg = "ALCOHOL";
   } else if (!helmetWorn) {
@@ -137,27 +137,29 @@ void loop() {
   rf_driver.send((uint8_t *)rfMsg, strlen(rfMsg));
   rf_driver.waitPacketSent(100);
 
-  // 3. Serial Monitor Output
-  Serial.print("IR1: ");
-  Serial.print(ir1Detected ? "DETECTED " : "CLEAR    ");
-  Serial.print("| IR2: ");
-  Serial.print(ir2Detected ? "DETECTED " : "CLEAR    ");
-  Serial.print("| Alc: ");
-  if (alcoholLevel < 100) Serial.print(" ");
-  if (alcoholLevel < 10)  Serial.print(" ");
+  // 3. Clear, Unified Serial Output Showing ALL Input Streams
+  Serial.print(F("[HELMET] IR1(Head): "));
+  Serial.print(ir1Detected ? F("OK   ") : F("OPEN "));
+  Serial.print(F(" | IR2(Strap): "));
+  Serial.print(ir2Detected ? F("OK   ") : F("OPEN "));
+  Serial.print(F(" | MQ3(Alc): "));
+  if (alcoholLevel < 100) Serial.print(F(" "));
+  if (alcoholLevel < 10)  Serial.print(F(" "));
   Serial.print(alcoholLevel);
-  if (alcoholDetected) {
-    Serial.print(" [ALCOHOL ALERT]");
+  Serial.print(alcoholDetected ? F(" [ALERT!] ") : F(" [CLEAN]  "));
+  Serial.print(F(" | MPU: "));
+  if (mpuAvailable) {
+    Serial.print(currentGForce, 2);
+    Serial.print(accident ? F("G [CRASH!] ") : F("G [NORMAL] "));
   } else {
-    Serial.print(" [NORMAL]       ");
+    Serial.print(F("N/A [NO MPU]   "));
   }
-  Serial.print(" | RF: [");
+  Serial.print(F(" | SEND -> ["));
   Serial.print(rfMsg);
-  Serial.print("] | Red LED: ");
+  Serial.println(F("]"));
 
   // 4. Indicator Outputs on Helmet Unit
   if (accident) {
-    Serial.println("ALARM FLASH");
     digitalWrite(LED_PIN, HIGH);
     digitalWrite(BUZZER_PIN, HIGH);
     delay(100);
@@ -165,18 +167,15 @@ void loop() {
     digitalWrite(BUZZER_PIN, LOW);
     delay(100);
   } else if (alcoholDetected) {
-    Serial.println("SOLID ON");
     digitalWrite(LED_PIN, HIGH);
-    delay(300);
+    delay(200);
   } else if (ir1Detected || ir2Detected) {
-    Serial.println("BLINKING");
     digitalWrite(LED_PIN, HIGH);
-    delay(150);
+    delay(120);
     digitalWrite(LED_PIN, LOW);
-    delay(150);
+    delay(120);
   } else {
-    Serial.println("OFF");
     digitalWrite(LED_PIN, LOW);
-    delay(300);
+    delay(200);
   }
 }

@@ -82,9 +82,9 @@ void displayStatus(const char* line1, const char* line2) {
   }
 }
 
-// Streams JSON Telemetry to PC/Web Gateway over USB Serial (10Hz)
+// Streams JSON Telemetry to PC/Web Gateway over USB Serial (2Hz / 500ms)
 void streamTelemetryJSON() {
-  if (millis() - lastTelemetryStream < 100) return;
+  if (millis() - lastTelemetryStream < 500) return;
   lastTelemetryStream = millis();
 
   Serial.print(F("{\"helmet\":"));
@@ -195,9 +195,15 @@ void loop() {
     message.trim();
 
     // Human-readable debug output for Serial Monitor
-    Serial.print(F("RF Packet Received: ["));
+    Serial.print(F("[BIKE RX] RF: ["));
     Serial.print(message);
-    Serial.println(F("]"));
+    Serial.print(F("] | Relay: "));
+    Serial.print(engineRunning ? F("ON (RUNNING) ") : F("OFF (LOCKED) "));
+    Serial.print(F("| LCD: \""));
+    Serial.print(lcdLine1);
+    Serial.print(F("\" / \""));
+    Serial.print(lcdLine2);
+    Serial.println(F("\""));
 
     // 2. Handle System States
     if (message == "SAFE") {
