@@ -6,13 +6,13 @@
 // ========================================================
 // PIN CONFIGURATION (RECEIVER / BIKE IGNITION UNIT)
 // ========================================================
-// RF Receiver DATA -> Arduino D11 (RadioHead standard RX pin)
+// RF Receiver DATA -> Arduino D2 (or D11 if preferred)
 // Buzzer (+)       -> Arduino D3
 // Relay Module IN  -> Arduino D8 (Active LOW)
 // Green LED (+)    -> Arduino D9 (Ignition indicator)
 // I2C LCD SDA      -> Arduino A4
 // I2C LCD SCL      -> Arduino A5
-const int RF_RX_PIN    = 11;
+const int RF_RX_PIN    = 2;
 const int RF_TX_UNUSED = 12; // Unused TX pin required by constructor
 const int BUZZER_PIN   = 3;
 const int RELAY_PIN    = 8;  // Active LOW relay module
@@ -169,16 +169,16 @@ void setup() {
 
   // 3. Initialize RadioHead 433MHz RF Receiver
   if (!rf_driver.init()) {
-    Serial.println(F("[RF] ERROR: RadioHead RF init failed on Pin 11!"));
+    Serial.println(F("[RF] ERROR: RadioHead RF init failed on Pin D2!"));
   } else {
-    Serial.println(F("[RF] Receiver Ready on Pin 11 (2000 bps)."));
+    Serial.println(F("[RF] Receiver Ready on Pin D2 (2000 bps)."));
   }
 
   Serial.println(F("\n================================================================================"));
   Serial.println(F("            AEGISHELM SMART HELMET SYSTEM - BIKE RECEIVER (COM4)                "));
   Serial.println(F("================================================================================"));
-  Serial.println(F("PINS: RF RX->D11 | Relay->D8 | Green LED->D9 | Buzzer->D3 | LCD->A4/A5"));
-  Serial.println(F("LISTENING FOR 433MHz HELMET TRANSMISSIONS..."));
+  Serial.println(F("PINS: RF RX->D2 | Relay->D8 | Green LED->D9 | Buzzer->D3 | LCD->A4/A5"));
+  Serial.println(F("LISTENING FOR 433MHz HELMET TRANSMISSIONS ON PIN D2..."));
   Serial.println(F("================================================================================"));
 }
 
@@ -309,6 +309,13 @@ void loop() {
       displayStatus("SIGNAL LOST", "ENGINE STOPPED");
       Serial.println(F("[RECEIVER] RF Signal Lost (>3s) -> Engine Stopped."));
     }
+  }
+
+  // 4. Heartbeat when waiting for initial signal
+  static unsigned long lastWaitHeartbeat = 0;
+  if (lastPacketTime == 0 && (millis() - lastWaitHeartbeat >= 3000)) {
+    lastWaitHeartbeat = millis();
+    Serial.println(F("[RECEIVER] Listening on Pin D2... (Waiting for RF signal from Helmet)"));
   }
 
   delay(20);
