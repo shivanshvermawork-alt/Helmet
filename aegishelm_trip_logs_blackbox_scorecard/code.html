@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed": "#00174b", "error-container": "#ffdad6", "tertiary-fixed": "#ffdada", "on-tertiary": "#ffffff", "surface-variant": "#dae2fd", "on-tertiary-fixed-variant": "#920028", "tertiary": "#ac0031", "surface-container-low": "#f2f3ff", "outline-variant": "#c3c6d7", "on-secondary-fixed": "#002114", "tertiary-fixed-dim": "#ffb3b6", "secondary-container": "#82f5c1", "tertiary-container": "#d71142", "primary-fixed": "#dbe1ff", "secondary": "#006c4a", "inverse-surface": "#283044", "on-tertiary-container": "#ffecec", "on-surface": "#131b2e", "on-background": "#131b2e", "inverse-primary": "#b4c5ff", "surface-container-lowest": "#ffffff", "on-primary-container": "#eeefff", "background": "#faf8ff", "secondary-fixed-dim": "#68dba9", "on-error": "#ffffff", "outline": "#737686", "on-secondary-fixed-variant": "#005137", "surface": "#faf8ff", "surface-dim": "#d2d9f4", "on-secondary-container": "#00714e", "primary-fixed-dim": "#b4c5ff", "inverse-on-surface": "#eef0ff", "primary": "#004ac6", "primary-container": "#2563eb", "surface-container-high": "#e2e7ff", "surface-container-highest": "#dae2fd", "on-secondary": "#ffffff", "secondary-fixed": "#85f8c4", "on-surface-variant": "#434655", "surface-container": "#eaedff", "surface-bright": "#faf8ff", "on-tertiary-fixed": "#40000c", "on-error-container": "#93000a", "on-primary": "#ffffff", "error": "#ba1a1a", "surface-tint": "#0053db", "on-primary-fixed-variant": "#003ea8" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-xl": "2.5rem", "space-md": "1rem", "space-sm": "0.5rem", "gutter-mobile": "1rem", "space-lg": "1.5rem", "margin": "2rem", "margin-mobile": "1rem", "gutter": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-md": [ "Space Grotesk" ], "body-sm": [ "Geist" ], "label-lg": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Space Grotesk" ], "headline-sm": [ "Space Grotesk" ], "body-lg": [ "Geist" ], "headline-lg": [ "Space Grotesk" ], "label-sm": [ "JetBrains Mono" ], "headline-lg-mobile": [ "Space Grotesk" ], "headline-xl": [ "Space Grotesk" ], "telemetry-unit": [ "JetBrains Mono" ], "body-md": [ "Geist" ], "label-md": [ "JetBrains Mono" ] }, "fontSize": { "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "label-lg": [ "14px", { "lineHeight": "20px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "headline-xl-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "fontWeight": "500" } ], "body-lg": [ "18px", { "lineHeight": "28px", "fontWeight": "400" } ], "headline-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "label-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500" } ], "headline-lg-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-xl": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "telemetry-unit": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.1em", "fontWeight": "700" } ], "body-md": [ "15px", { "lineHeight": "22px", "fontWeight": "400" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "500" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.06)] border-b border-surface-container-high/50"><div class="h-20 max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 flex items-center justify-between gap-4"><div class="flex items-center gap-3.5 shrink-0"><div class="w-11 h-11 rounded-2xl bg-primary-container flex items-center justify-center text-on-primary shadow-[0_0_24px_rgba(37,99,235,0.3)]"><span class="material-symbols-outlined text-[26px]">shield</span></div><div class="flex flex-col"><div class="flex items-center gap-2"><span class="font-headline-sm text-xl lg:text-2xl text-on-surface tracking-tight font-black">AegisHelm</span><span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-xs tracking-wider uppercase font-bold">Smart IoT · Safety Interlock</span></div><span class="font-label-sm text-xs text-outline tracking-wider uppercase font-semibold">Embedded Telemetry System</span></div></div><nav class="hidden lg:flex items-center p-1.5 bg-surface-container-low rounded-full gap-1.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold shadow-sm"><a class="px-5 py-2.5 rounded-full font-label-md text-sm text-on-surface-variant hover:text-on-surface transition-all font-medium" data-path="live-cockpit" href="/">Live Cockpit</a><a class="px-5 py-2.5 rounded-full font-label-md text-sm text-on-surface-variant hover:text-on-surface transition-all font-medium" data-path="motion-impact" href="/#section-motion">Motion &amp; Impact</a><a aria-current="page" class="px-5 py-2.5 rounded-full transition-all bg-primary-container text-on-primary-container font-semibold text-sm shadow-sm" data-path="trip-logs-score" href="/trip-logs">Trip Logs &amp; Score</a></nav><div class="flex items-center gap-3.5 shrink-0"><div class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-container-low border border-surface-container-high/40"><span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span></span><span class="font-label-sm text-xs font-semibold text-on-surface-variant">Virtual Simulator · Arduino USB: COM3 (10Hz)</span></div><div class="hidden xl:flex items-center px-3.5 py-2 rounded-full bg-surface-container-high font-label-md text-xs text-on-surface font-bold tracking-wider">14:42:08 UTC</div><button aria-label="Toggle Alert Chime" class="w-10 h-10 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center justify-center transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[22px]">notifications_active</span></button><button aria-label="Toggle Light/Dark Theme" class="w-10 h-10 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center justify-center transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[22px]">light_mode</span></button><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-md"><span class="material-symbols-outlined text-on-primary text-[20px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
+<!-- Dynamic Nav Alignment Script (updates global shell segment indicator) -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const navLinks = document.querySelectorAll("header nav a");
+      navLinks.forEach((link) => {
+        const path = link.getAttribute("data-path");
+        if (path === "trip-logs-score") {
+          link.className =
+            "px-4 py-2 rounded-full font-label-md text-label-md bg-primary-container text-on-primary-container font-semibold shadow-sm transition-all";
+        } else {
+          link.className =
+            "px-4 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all";
+        }
+      });
+    });
+  </script>
+<!-- Content Container with Automotive Margins & Gutters -->
+<div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 py-8 flex flex-col gap-8">
+<!-- 1. HEADER & SESSION SUMMARY BAR -->
+<section class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-2">
+<div class="flex flex-col gap-2 max-w-3xl">
+<div class="flex items-center gap-2.5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            EEPROM Ring Buffer · Non-Volatile Tier
+          </span>
+<span class="text-outline-variant font-label-sm text-label-sm">/</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">Active Telemetry Audit</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">
+          Trip Logs &amp; Blackbox Audit Intelligence
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Cryptographically signed on-chip non-volatile EEPROM telemetry logging, algorithmic insurance risk qualification, and microsecond sensor kinematics for academic safety interlock audit.
+        </p>
+</div>
+<!-- Quick Action Controls -->
+<div class="flex flex-wrap items-center gap-3 shrink-0">
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container-low font-label-md text-label-md shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">calendar_today</span>
+<span>Last 7 Days</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container-low font-label-md text-label-md shadow-sm transition-all" onclick="alert('Exporting verified EEPROM hex-dump table (CRC-32 Validated)...')" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">download</span>
+<span>EEPROM CSV</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container-low font-label-md text-label-md shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">picture_as_pdf</span>
+<span>Insurance Dossier</span>
+</button>
+<div class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-md text-label-md font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span>Audit Mode: Active</span>
+</div>
+</div>
+</section>
+<!-- 2. TOP KPIS / SCORECARD HERO METRICS (4 CARDS) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1: Aggregate Safety Index -->
+<div class="p-6 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">Aggregated Safety Index</span>
+<span class="p-2 rounded-full bg-surface-container-low text-primary">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+</span>
+</div>
+<div class="my-4 flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">94.8</span>
+<span class="font-telemetry-unit text-telemetry-unit text-outline">/ 100</span>
+</div>
+<span class="font-label-sm text-label-sm font-semibold text-secondary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> +2.4% vs prev week
+            </span>
+</div>
+<!-- Circular Score Arc SVG -->
+<div class="relative w-16 h-16 shrink-0 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 36 36">
+<path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-primary stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="94.8, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<span class="absolute font-label-sm text-label-sm font-bold text-on-surface">A+</span>
+</div>
+</div>
+<div class="pt-3 flex items-center justify-between bg-surface-container-low/50 -mx-6 -mb-6 px-6 py-3">
+<span class="font-label-sm text-label-sm text-outline">Risk Classification</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm font-semibold">Tier 1 · Elite Rider</span>
+</div>
+</div>
+<!-- Card 2: Interlock Adherence -->
+<div class="p-6 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">Interlock Adherence</span>
+<span class="p-2 rounded-full bg-surface-container-low text-secondary">
+<span class="material-symbols-outlined text-[20px]">lock_reset</span>
+</span>
+</div>
+<div class="my-4 flex flex-col">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">99.2</span>
+<span class="font-telemetry-unit text-telemetry-unit text-outline">%</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Zero relay bypass attempts detected
+          </span>
+</div>
+<div class="pt-3 flex items-center justify-between bg-surface-container-low/50 -mx-6 -mb-6 px-6 py-3">
+<span class="font-label-sm text-label-sm text-outline">IR Strap / BAC Clean</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">100% / 100% Safe</span>
+</div>
+</div>
+<!-- Card 3: Total Logged Distance & Duration -->
+<div class="p-6 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">Logged Distance</span>
+<span class="p-2 rounded-full bg-surface-container-low text-primary-container">
+<span class="material-symbols-outlined text-[20px]">route</span>
+</span>
+</div>
+<div class="my-4 flex flex-col">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">1,248.6</span>
+<span class="font-telemetry-unit text-telemetry-unit text-outline">KM</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Across 38 fully synchronized trips
+          </span>
+</div>
+<div class="pt-3 flex items-center justify-between bg-surface-container-low/50 -mx-6 -mb-6 px-6 py-3">
+<span class="font-label-sm text-label-sm text-outline">Mean Cruise Speed</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">41.2 km/h (34m avg)</span>
+</div>
+</div>
+<!-- Card 4: Blackbox Memory Health -->
+<div class="p-6 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">EEPROM Blackbox Heap</span>
+<span class="p-2 rounded-full bg-surface-container-low text-tertiary">
+<span class="material-symbols-outlined text-[20px]">storage</span>
+</span>
+</div>
+<div class="my-4 flex flex-col">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">42.8</span>
+<span class="font-telemetry-unit text-telemetry-unit text-outline">/ 512 KB</span>
+</div>
+<!-- Storage Meter Progress Bar -->
+<div class="w-full bg-surface-container-high h-2 rounded-full mt-3 overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 8.3%;"></div>
+</div>
+</div>
+<div class="pt-3 flex items-center justify-between bg-surface-container-low/50 -mx-6 -mb-6 px-6 py-3">
+<span class="font-label-sm text-label-sm text-outline">CRC-32 Integrity</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm font-semibold">0x8F32C01A Verified</span>
+</div>
+</div>
+</section>
+<!-- 3. DETAILED SCORECARD & BEHAVIORAL RADAR / BREAKDOWN -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+<!-- Left Column: Driver Telemetry Score Breakdown (7 cols) -->
+<div class="lg:col-span-7 p-8 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-6">
+<div>
+<div class="flex items-center justify-between gap-4 mb-2">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">
+                Driver Telemetry Score Breakdown
+              </h2>
+</div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Multi-Sensor Fusion</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Safety vectors computed through 100Hz IMU sampling, infrared interlocks, MQ-3 alcohol transconductance, and PERCLOS eye drowsiness algorithms.
+          </p>
+</div>
+<!-- Metric Bars -->
+<div class="flex flex-col gap-4">
+<!-- Metric 1 -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+                Helmet Buckle Fasten Compliance (IR Beam Interlock)
+              </span>
+<span class="text-secondary font-semibold">100.0% · Flawless</span>
+</div>
+<div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+                Sober Breathalyzer Compliance (MQ-3 Sensor &lt; 0.00% BAC)
+              </span>
+<span class="text-secondary font-semibold">100.0% · Clean</span>
+</div>
+<div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">visibility</span>
+                Alertness &amp; Rider Vigilance (PERCLOS &lt; 12%)
+              </span>
+<span class="text-primary font-semibold">96.4% · Optimal</span>
+</div>
+<div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 96.4%;"></div>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">sync_alt</span>
+                Lean Angle Stability (MPU-6050 DCM within ±35°)
+              </span>
+<span class="text-on-surface font-semibold">92.1% · Smooth</span>
+</div>
+<div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 92.1%;"></div>
+</div>
+</div>
+<!-- Metric 5 -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">speed</span>
+                G-Force Deceleration Smoothness (Peak &lt; 1.2G Vector)
+              </span>
+<span class="text-on-surface font-semibold">88.5% · 2 Harsh Brakes</span>
+</div>
+<div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 88.5%;"></div>
+</div>
+</div>
+</div>
+<!-- Insurance Incentive Banner -->
+<div class="p-4 rounded-2xl bg-surface-container-low flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">savings</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold text-[16px] leading-tight">
+                Insurer Telemetry Discount: -18% Premium
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+                AegisSafe Smart Policy Hash: #AS-AEGIS-7749
+              </span>
+</div>
+</div>
+<span class="px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold whitespace-nowrap cursor-pointer hover:bg-primary-container transition-colors">
+            Claim Certificate
+          </span>
+</div>
+</div>
+<!-- Right Column: Trip Risk & Contextual Exposure (5 cols) -->
+<div class="lg:col-span-5 p-8 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-6">
+<div>
+<div class="flex items-center justify-between gap-4 mb-2">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">radar</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">
+                Risk &amp; Incident Distribution
+              </h2>
+</div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">7D Window</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Environmental context mapped during microcontroller runtime logging.
+          </p>
+</div>
+<!-- Visual Risk Splits -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Dial Breakdown 1 -->
+<div class="p-4 rounded-2xl bg-surface-container-low flex flex-col items-center justify-center text-center">
+<div class="relative w-20 h-20 mb-2">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 36 36">
+<path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="4"></path>
+<path class="text-primary stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="68, 100" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold leading-none">68%</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Daytime Riding</span>
+<span class="font-label-sm text-label-sm text-outline">32% Night / Low-Lux</span>
+</div>
+<!-- Dial Breakdown 2 -->
+<div class="p-4 rounded-2xl bg-surface-container-low flex flex-col items-center justify-center text-center">
+<div class="relative w-20 h-20 mb-2">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 36 36">
+<path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="4"></path>
+<path class="text-secondary stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="84, 100" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold leading-none">84%</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Dry Pavement</span>
+<span class="font-label-sm text-label-sm text-outline">16% Wet Surface</span>
+</div>
+</div>
+<!-- Kinematic Shock Vector Summary -->
+<div class="p-4 rounded-2xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">crisis_alert</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Peak Inertial Vector</span>
+<span class="font-label-sm text-label-sm text-outline">Recorded during abrupt ABS stop</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-tertiary font-bold tracking-tight">1.68 G</span>
+<span class="block font-telemetry-unit text-telemetry-unit text-outline">Threshold: 2.50G</span>
+</div>
+</div>
+<!-- Subtext Footer -->
+<div class="flex items-center justify-between text-outline font-label-sm text-label-sm">
+<span>Firmware Threshold: ATmega DCM Loop</span>
+<span>Zero Free-Fall Events</span>
+</div>
+</div>
+</section>
+<!-- 4. INTERACTIVE RECENT TRIP LOGS TABLE / REPOSITORY -->
+<section class="p-8 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col gap-6">
+<!-- Section Header with Search & Filter -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<div class="w-9 h-9 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">table_rows</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">
+              Recorded Telemetry Trips (EEPROM Flash Ledger)
+            </h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Persistent EEPROM flash transaction log containing timestamped GPS tracks, interlock assertions, and lean envelopes.
+          </p>
+</div>
+<!-- Filter Pill Group -->
+<div class="flex items-center gap-2 p-1.5 bg-surface-container-low rounded-full shrink-0">
+<button class="px-3.5 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container-lowest text-on-surface font-semibold shadow-xs" type="button">
+            All (38)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" type="button">
+            Grade A+ (31)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" type="button">
+            Warnings (7)
+          </button>
+</div>
+</div>
+<!-- Table Wrapper -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[900px]">
+<thead>
+<tr class="font-label-sm text-label-sm text-outline uppercase tracking-wider border-b-0 bg-surface-container-low/40 rounded-2xl">
+<th class="py-3.5 px-4 rounded-l-2xl">Trip Identifier &amp; Time</th>
+<th class="py-3.5 px-4">Route &amp; Distance</th>
+<th class="py-3.5 px-4">Kinematics &amp; Speed</th>
+<th class="py-3.5 px-4">Interlock Check</th>
+<th class="py-3.5 px-4">Safety Score</th>
+<th class="py-3.5 px-4 text-right rounded-r-2xl">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent font-body-sm text-body-sm">
+<!-- Row 1: Excellent -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">two_wheeler</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">#TRIP-0842</span>
+<span class="font-label-sm text-label-sm text-outline">Today · 14:15 - 14:52 UTC</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">MG Road Tech Park → Indiranagar Hub</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">14.8 km · Urban Corridor</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">38.4 km/h avg · Peak 62 km/h</span>
+<span class="font-label-sm text-label-sm text-outline">Max Lean: 24° · Shock: 1.12G</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Verified 100% · 0.00% BAC</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-secondary/10 text-secondary font-label-md text-label-md font-bold">
+                    98 / 100
+                  </span>
+<span class="font-label-sm text-label-sm text-outline">Grade A+</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary transition-colors" title="Inspect Trace" type="button">
+<span class="material-symbols-outlined text-[18px]">polyline</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors" title="Download Telemetry Frame" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Standard Clean Ride -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">two_wheeler</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">#TRIP-0841</span>
+<span class="font-label-sm text-label-sm text-outline">Yesterday · 09:30 - 10:14 UTC</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Koramangala 4th Block → Whitefield EPIP</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">22.4 km · Ring Road Expressway</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">51.2 km/h avg · Peak 74 km/h</span>
+<span class="font-label-sm text-label-sm text-outline">Max Lean: 29° · Shock: 1.25G</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Verified 100% · 0.00% BAC</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-secondary/10 text-secondary font-label-md text-label-md font-bold">
+                    94 / 100
+                  </span>
+<span class="font-label-sm text-label-sm text-outline">Grade A</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary transition-colors" title="Inspect Trace" type="button">
+<span class="material-symbols-outlined text-[18px]">polyline</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors" title="Download Telemetry Frame" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Warning flagged (Late night yaw fatigue) -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-container/10 text-tertiary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">#TRIP-0840</span>
+<span class="font-label-sm text-label-sm text-outline">22 Oct · 23:40 - 00:22 UTC</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Electronic City → HSR Layout Sector 1</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">18.1 km · Night Commute</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">44.0 km/h avg · Peak 68 km/h</span>
+<span class="font-label-sm text-label-sm text-tertiary-container font-medium">1x Yaw Drift Warning (PERCLOS 14%)</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Verified 100% · 0.00% BAC</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-tertiary-container/10 text-tertiary-container font-label-md text-label-md font-bold">
+                    82 / 100
+                  </span>
+<span class="font-label-sm text-label-sm text-tertiary-container font-medium">Grade B (Alert)</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary transition-colors" title="Inspect Trace" type="button">
+<span class="material-symbols-outlined text-[18px]">polyline</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors" title="Download Telemetry Frame" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Flawless Highway -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">two_wheeler</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">#TRIP-0839</span>
+<span class="font-label-sm text-label-sm text-outline">21 Oct · 08:05 - 08:32 UTC</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Hebbal Flyover → Bangalore Int. Airport Road</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">28.0 km · Open Highway</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">62.8 km/h avg · Peak 79 km/h</span>
+<span class="font-label-sm text-label-sm text-outline">Max Lean: 21° · Shock: 0.94G</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Verified 100% · 0.00% BAC</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-secondary/10 text-secondary font-label-md text-label-md font-bold">
+                    99 / 100
+                  </span>
+<span class="font-label-sm text-label-sm text-outline">Grade A+</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-high text-primary transition-colors" title="Inspect Trace" type="button">
+<span class="material-symbols-outlined text-[18px]">polyline</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors" title="Download Telemetry Frame" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination and Footer Ledger Meta -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+<span class="font-label-sm text-label-sm text-outline">
+          Displaying 4 of 38 trips registered in flash segment 0x0000 - 0x7FFF
+        </span>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" disabled="" type="button">
+            Previous
+          </button>
+<span class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold">1</span>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm transition-colors" type="button">
+            2
+          </button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm transition-colors" type="button">
+            3
+          </button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm transition-colors" type="button">
+            Next
+          </button>
+</div>
+</div>
+</section>
+<!-- 5. MICROSECOND BLACKBOX EEPROM INCIDENT INSPECTOR DRAWER / CARD -->
+<section class="p-8 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col gap-6">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<div class="w-9 h-9 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">
+              EEPROM Hardware Event Log (Raw Serial Stream @ 115200 Baud)
+            </h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Deterministic ATmega328P interrupt routines and ESP32 DMA transaction traces decoded from internal non-volatile EEPROM memory.
+          </p>
+</div>
+<!-- Filter Sub-nav -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold" type="button">
+            All Events (42)
+          </button>
+<button class="px-3 py-1 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm font-medium transition-colors" type="button">
+            Interlock Triggers (12)
+          </button>
+<button class="px-3 py-1 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm font-medium transition-colors" type="button">
+            MPU Kinematics (18)
+          </button>
+<button class="px-3 py-1 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm font-medium transition-colors" type="button">
+            Warnings (2)
+          </button>
+</div>
+</div>
+<!-- Monospace Terminal Log Box -->
+<div class="w-full bg-surface-container-low rounded-2xl p-5 font-label-sm text-label-sm overflow-x-auto shadow-inner flex flex-col gap-2.5">
+<!-- Log line 1 -->
+<div class="flex items-start gap-4 hover:bg-surface-container-high/60 px-3 py-1.5 rounded-lg transition-colors">
+<span class="text-outline shrink-0 font-telemetry-unit">14:48:12.894</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-bold shrink-0 font-telemetry-unit">0x41:RELAY_STAT</span>
+<span class="text-on-surface">
+            Interlock Relay closed; starter energized (+12.4V DC, Pin D7 High). Both helmet latch &amp; BAC thresholds satisfied.
+          </span>
+<span class="text-secondary ml-auto shrink-0 font-semibold">[NOMINAL]</span>
+</div>
+<!-- Log line 2 -->
+<div class="flex items-start gap-4 hover:bg-surface-container-high/60 px-3 py-1.5 rounded-lg transition-colors">
+<span class="text-outline shrink-0 font-telemetry-unit">14:32:04.102</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-bold shrink-0 font-telemetry-unit">0x12:MQ3_SAMPLE</span>
+<span class="text-on-surface">
+            Analog Breath sample 138 ADC (Threshold 350) → SOBER_VALID. Sensor pre-heat heater loop stable at 5.0V.
+          </span>
+<span class="text-secondary ml-auto shrink-0 font-semibold">[PASS]</span>
+</div>
+<!-- Log line 3 -->
+<div class="flex items-start gap-4 hover:bg-surface-container-high/60 px-3 py-1.5 rounded-lg transition-colors">
+<span class="text-outline shrink-0 font-telemetry-unit">14:28:44.519</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-bold shrink-0 font-telemetry-unit">0x08:OPT_HELMET</span>
+<span class="text-on-surface">
+            IR beam capacitive phototransistor check: 100% contact maintained. Debounce state count = 0 errors.
+          </span>
+<span class="text-secondary ml-auto shrink-0 font-semibold">[ENGAGED]</span>
+</div>
+<!-- Log line 4 -->
+<div class="flex items-start gap-4 hover:bg-surface-container-high/60 px-3 py-1.5 rounded-lg transition-colors">
+<span class="text-outline shrink-0 font-telemetry-unit">14:19:10.012</span>
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-bold shrink-0 font-telemetry-unit">0x60:MPU_EVENT</span>
+<span class="text-on-surface">
+            Peak G-vector 1.42G sustained for 0.4s during right-hand round-about exit. Roll angle 28.4°. Stored in EEPROM page #0x12F.
+          </span>
+<span class="text-tertiary ml-auto shrink-0 font-semibold">[INFO]</span>
+</div>
+<!-- Log line 5 -->
+<div class="flex items-start gap-4 hover:bg-surface-container-high/60 px-3 py-1.5 rounded-lg transition-colors">
+<span class="text-outline shrink-0 font-telemetry-unit">14:15:00.000</span>
+<span class="px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-bold shrink-0 font-telemetry-unit">0x01:BOOT_INIT</span>
+<span class="text-on-surface">
+            Cold boot successful. Firmware build v2.4.1 (ATmega328P / ESP32 dual-core coprocessor). I2C bus scan at 400kHz: MPU6050 (0x68) &amp; SSD1306 (0x3C) OK.
+          </span>
+<span class="text-secondary ml-auto shrink-0 font-semibold">[SYSTEM_OK]</span>
+</div>
+</div>
+<!-- Action Footer for Blackbox Drawer -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+<div class="flex items-center gap-2 text-outline font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">memory</span>
+<span>EEPROM Wear Leveling Index: 99.8% Lifespan Remaining (100k cycles max)</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors" onclick="alert('Streaming live UART monitor...')" type="button">
+<span class="material-symbols-outlined text-[16px] align-middle mr-1 text-primary">play_arrow</span> Live Stream
+          </button>
+<button class="px-4 py-2 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors" onclick="alert('EEPROM dump ready for laboratory assessment.')" type="button">
+<span class="material-symbols-outlined text-[16px] align-middle mr-1 text-on-surface-variant">file_download</span> Dump HEX File
+          </button>
+<button class="px-4 py-2 rounded-full bg-tertiary/10 text-tertiary hover:bg-tertiary/20 font-label-md text-label-md transition-colors" onclick="confirm('Are you sure you want to reset EEPROM buffer markers? Logged incidents are protected by system supervisor lock.')" type="button">
+<span class="material-symbols-outlined text-[16px] align-middle mr-1">delete_sweep</span> Flush Buffer
+          </button>
+</div>
+</div>
+</section>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest py-8 shadow-[0_-1px_8px_rgba(0,0,0,0.02)] border-t border-surface-container-high/40"><div class="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 flex flex-col md:flex-row items-center justify-between gap-4"><div class="flex items-center gap-2.5 text-on-surface-variant font-medium text-xs sm:text-sm"><span class="material-symbols-outlined text-primary text-[18px]">memory</span><span>Smart Helmet &amp; Motorcycle Safety Control Platform</span></div><div class="text-xs sm:text-sm text-outline font-medium">© 2025 AegisHelm IoT Telemetry · Intelligent Motorcycle Safety System</div></div></footer></body></html>
