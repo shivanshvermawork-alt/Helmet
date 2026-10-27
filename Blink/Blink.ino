@@ -1,3 +1,4 @@
+#include <Wire.h>
 #include <RH_ASK.h>
 #include <SPI.h>
 
@@ -10,12 +11,59 @@ const int BUZZER_PIN        = 8;    // Buzzer (+)               -> Arduino D8
 const int LED_PIN           = 9;    // Red Indicator LED        -> Arduino D9
 const int RF_TX_PIN         = 12;   // RF Transmitter DATA      -> Arduino D12
 const int MQ3_ANALOG_PIN    = A0;   // MQ-3 Analog (AO)         -> Arduino A0
+// MPU-6050 Accelerometer: SDA -> A4, SCL -> A5, VCC -> 5V, GND -> GND
 
 // Alcohol threshold: Clean air is ~250. Exceeding 450 triggers ALCOHOL alert.
 const int ALCOHOL_THRESHOLD = 450;
 
+// MPU-6050 I2C Address (default is 0x68)
+const int MPU_ADDR = 0x68;
+bool mpuAvailable = false;
+
 // Initialize RadioHead ASK driver (Speed: 2000 bps, TX on Pin 12)
 RH_ASK rf_driver(2000, 11, RF_TX_PIN);
+
+void initMPU() {
+  Wire.begin();
+  Wire.beginTransmission(MPU_ADDR);
+  Wire.write(0x6B); // Power Management register 1
+  Wire.write(0);    // Wake up MPU-6050
+  byte error = Wire.endTransmission();
+
+  if (error == 0) {
+    mpuAvailable = true;
+    Serial.println("MPU-6050 Accelerometer initialized at 0x68.");
+  } else {
+    mpuAvailable = false;
+    Serial.println("Note: MPU-6050 not detected at 0x68 (proceeding with IR & MQ3).");
+  }
+}
+
+bool checkAccident() {
+  if (!mpuAvailable) return false;
+
+  Wire.beginTransmission(MPU_ADDR);
+  Wire.write(0x3B); // Starting at register 0x3B (ACCEL_XOUT_H)
+  if (Wire.endTransmission(false) != 0) return false;
+
+  Wire.requestFrom(MPU_ADDR, 6, true);
+  if (Wire.available() < 6) return false;
+
+  int16_t ax = Wire.read() << 8 | Wire.read();
+  int16_t ay = Wire.read() << 8 | Wire.read();
+  int16_t az = Wire.read() << 8 | Wire.read();
+
+  // Convert raw values to g's (scale is 16384 LSB/g)
+  float totalAcc = sqrt((float)ax * ax + (float)ay * ay + (float)az * az) / 16384.0;
+
+  // Impact threshold: > 2.6g or severe free-fall (< 0.25g) indicates a crash
+  if (totalAcc > 2.6 || totalAcc < 0.25) {
+    Serial.print("ACCIDENT DETECTED! G-Force: ");
+    Serial.println(totalAcc);
+    return true;
+  }
+  return false;
+}
 
 void setup() {
   Serial.begin(9600);
@@ -27,8 +75,7 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   pinMode(BUZZER_PIN, OUTPUT);
 
-  // --- HARDWARE BOOT TEST ---
-  // Force Red LED ON for 1 second to confirm wiring & LED polarity
+  // Hardware boot self-test: Red LED & Buzzer pulse for 1 second
   digitalWrite(LED_PIN, HIGH);
   digitalWrite(BUZZER_PIN, HIGH);
   delay(100);
@@ -38,10 +85,13 @@ void setup() {
 
   Serial.println("==================================================");
   Serial.println("Arduino 1 (Helmet Transmitter) Running");
-  Serial.println("Pins: IR1->D2 | IR2->D3 | MQ3->A0 | Buzzer->D8 | Red LED->D9 | RF->D12");
+  Serial.println("Pins: IR1->D2 | IR2->D3 | MQ3->A0 | Buzzer->D8 | Red LED->D9 | RF->D12 | MPU->A4/A5");
   Serial.print("Alcohol Threshold: ");
   Serial.println(ALCOHOL_THRESHOLD);
   Serial.println("==================================================");
+
+  // Initialize MPU-6050
+  initMPU();
 
   // Initialize RF Transmitter
   if (!rf_driver.init()) {
@@ -57,10 +107,11 @@ void setup() {
 void loop() {
   digitalWrite(BUZZER_PIN, LOW);
 
-  // 1. Read Dual IR Sensors & Alcohol Sensor
+  // 1. Read Sensors
   int ir1State = digitalRead(IR_SENSOR_1_PIN);
   int ir2State = digitalRead(IR_SENSOR_2_PIN);
   int alcoholLevel = analogRead(MQ3_ANALOG_PIN);
+  bool accident = checkAccident();
 
   // Active-low IR detection: LOW when obstacle reflects IR
   bool ir1Detected     = (ir1State == LOW);
@@ -68,18 +119,21 @@ void loop() {
   bool helmetWorn      = (ir1Detected && ir2Detected); // Both head + strap
   bool alcoholDetected = (alcoholLevel >= ALCOHOL_THRESHOLD);
 
-  // 2. Determine System State & Transmit via RF
+  // 2. Determine System State & Priority
+  // Priority: ACCIDENT > ALCOHOL > NO_HELMET > SAFE
   const char *rfMsg = "NO_HELMET";
 
-  if (alcoholDetected) {
+  if (accident) {
+    rfMsg = "ACCIDENT";
+  } else if (alcoholDetected) {
     rfMsg = "ALCOHOL";
   } else if (!helmetWorn) {
     rfMsg = "NO_HELMET";
   } else {
-    rfMsg = "SAFE"; // Helmet ON, Strap ON, No Alcohol
+    rfMsg = "SAFE"; // Helmet ON, Strap ON, No Alcohol, No Crash
   }
 
-  // Transmit RF packet with 100ms safe timeout (prevents any freeze)
+  // Transmit RF packet with 100ms safe timeout
   rf_driver.send((uint8_t *)rfMsg, strlen(rfMsg));
   rf_driver.waitPacketSent(100);
 
@@ -101,11 +155,16 @@ void loop() {
   Serial.print(rfMsg);
   Serial.print("] | Red LED: ");
 
-  // 4. Red LED Indication on Helmet Unit (Pin D9)
-  // - Alcohol Detected: SOLID ON
-  // - Helmet Worn (or either IR active): BLINKS
-  // - Clear / Off: OFF
-  if (alcoholDetected) {
+  // 4. Indicator Outputs on Helmet Unit
+  if (accident) {
+    Serial.println("ALARM FLASH");
+    digitalWrite(LED_PIN, HIGH);
+    digitalWrite(BUZZER_PIN, HIGH);
+    delay(100);
+    digitalWrite(LED_PIN, LOW);
+    digitalWrite(BUZZER_PIN, LOW);
+    delay(100);
+  } else if (alcoholDetected) {
     Serial.println("SOLID ON");
     digitalWrite(LED_PIN, HIGH);
     delay(300);
