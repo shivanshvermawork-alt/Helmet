@@ -1,43 +1,53 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Upload Arduino 1 (Transmitter / Helmet)",
-            "type": "shell",
-            "command": "\"${env:USERPROFILE}\\.antigravity-ide\\extensions\\vsciot-vscode.vscode-arduino-0.7.1\\assets\\platform\\win32-x64\\arduino-cli\\arduino-cli.exe\" compile --upload -p COM7 --fqbn arduino:avr:uno \"${workspaceFolder}\\Blink\"",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Upload Arduino 2 (Receiver / Bike Unit)",
-            "type": "shell",
-            "command": "\"${env:USERPROFILE}\\.antigravity-ide\\extensions\\vsciot-vscode.vscode-arduino-0.7.1\\assets\\platform\\win32-x64\\arduino-cli\\arduino-cli.exe\" compile --upload -p COM4 --fqbn arduino:avr:uno \"${workspaceFolder}\\Receiver\"",
-            "problemMatcher": []
-        },
-        {
-            "label": "Monitor Arduino 1 (COM7 - Helmet Transmitter)",
-            "type": "shell",
-            "command": "powershell -ExecutionPolicy Bypass -File \"${workspaceFolder}\\monitor.ps1\" -portName COM7",
-            "presentation": {
-                "reveal": "always",
-                "panel": "new",
-                "focus": true
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Monitor Arduino 2 (COM4 - Bike Receiver)",
-            "type": "shell",
-            "command": "powershell -ExecutionPolicy Bypass -File \"${workspaceFolder}\\monitor.ps1\" -portName COM4",
-            "presentation": {
-                "reveal": "always",
-                "panel": "new",
-                "focus": true
-            },
-            "problemMatcher": []
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🛡️ Launch AegisHelm Full-Stack & Hardware Wizard",
+      "type": "shell",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"${workspaceFolder}/arduino/tools/Hardware_Setup_Wizard.ps1\"",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🚀 Start Node.js Web Gateway Server (Port 8080)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/server/server.js\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": false
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "📡 Live Serial Monitor (PowerShell)",
+      "type": "shell",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"${workspaceFolder}/arduino/tools/monitor.ps1\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔓 Release COM Port for Upload (35s Pause)",
+      "type": "shell",
+      "command": "powershell -Command \"try { Invoke-RestMethod -Method Post -Uri 'http://localhost:8080/api/disconnect' -Body '{\\\"pauseMs\\\":35000}' -ContentType 'application/json'; Write-Host 'COM Port Released for 35 seconds!' -ForegroundColor Green } catch { Write-Host 'Server not responding on 8080' -ForegroundColor Yellow }\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
 }
