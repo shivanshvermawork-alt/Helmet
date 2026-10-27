@@ -1,15 +1,12 @@
 @echo off
 title AegisHelm Stitch IoT Full-Stack System
+cd /d "%~dp0"
+
 echo ========================================================
-echo   Launching AegisHelm Stitch Full-Stack IoT System
+echo   Launching AegisHelm Hardware & Dashboard System
 echo ========================================================
 echo.
-echo Starting Backend & Serial Gateway on http://localhost:8080 ...
-start "AegisHelm Server" cmd /k "cd server && npm start"
-timeout /t 3 /nobreak >nul
-echo.
-echo Opening Live Cockpit Dashboard in your browser...
-start http://localhost:8080
-echo.
-echo System is running!
+
+powershell -NoProfile -ExecutionPolicy Bypass -File "arduino\tools\Hardware_Setup_Wizard.ps1"
+
 pause
