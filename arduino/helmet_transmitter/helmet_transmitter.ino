@@ -130,7 +130,9 @@ void loop() {
   // 3. Determine System State & RF Message
   const char *rfMsg = "NO_HELMET";
 
-  if (alcoholDetected) {
+  if (crashDetected) {
+    rfMsg = "CRASH";
+  } else if (alcoholDetected) {
     rfMsg = "ALCOHOL";
   } else if (!helmetWorn) {
     rfMsg = "NO_HELMET";
@@ -153,6 +155,16 @@ void loop() {
     Serial.print(" [ALCOHOL ALERT]");
   } else {
     Serial.print(" [NORMAL]       ");
+  }
+  if (hasMPU) {
+    Serial.print(" | Accel: ");
+    Serial.print(total_g, 2);
+    Serial.print("G (P:");
+    Serial.print(pitch, 1);
+    Serial.print("° R:");
+    Serial.print(roll, 1);
+    Serial.print("°)");
+    if (crashDetected) Serial.print(" [CRASH IMPACT!]");
   }
   Serial.print(" | RF: [");
   Serial.print(rfMsg);

@@ -271,6 +271,24 @@ function connectToSerial(portPath, baudRate = 9600) {
           io.emit('system-status', { mode: systemMode, port: connectedPortName });
         }
         io.emit('telemetry', currentTelemetry);
+      } else if (trimmed.includes('[CRASH]')) {
+        currentTelemetry = {
+          ...currentTelemetry,
+          crash: 1,
+          gForce: 4.35,
+          pitch: 64.0,
+          roll: -52.0,
+          relay: 0,
+          speedKmh: 0,
+          lcd1: "CRASH DETECTED! ",
+          lcd2: "SOS DISPATCHING ",
+          timestamp: Date.now()
+        };
+        if (systemMode !== 'HARDWARE') {
+          systemMode = 'HARDWARE';
+          io.emit('system-status', { mode: systemMode, port: connectedPortName });
+        }
+        io.emit('telemetry', currentTelemetry);
       } else if (trimmed.toLowerCase().includes('signal lost') || trimmed.includes('TIMEOUT')) {
         currentTelemetry = {
           ...currentTelemetry,

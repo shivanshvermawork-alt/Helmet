@@ -239,6 +239,19 @@ void loop() {
         displayStatus("WEAR HELMET &", "FASTEN STRAP!");
       }
     }
+    else if (message == "CRASH") {
+      crashState = 1;
+      gForce_val = 4.35;
+      pitch_val  = 64.0;
+      roll_val   = -52.0;
+
+      if (lastState != "CRASH") {
+        lastState = "CRASH";
+        setEngine(false); // Kill engine immediately on impact
+        digitalWrite(BUZZER_PIN, HIGH);
+        displayStatus("CRASH DETECTED! ", "SOS DISPATCHING ");
+      }
+    }
     // Extended packet handling with MPU-6050 (Format: H:1,A:0,D:0,C:0...)
     else if (message.startsWith("H:")) {
       int h = 0, a = 0, d = 0, c = 0;
