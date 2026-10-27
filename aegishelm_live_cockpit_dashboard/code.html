@@ -100,51 +100,40 @@
       </div>
     </div>
 
-    <!-- Center/Right: The Realistic 16x2 LCD Display -->
-    <div class="w-full max-w-2xl bg-[#0a1120] rounded-2xl p-4 sm:p-6 shadow-2xl border-4 border-[#1e293b] relative group">
-      <!-- PCB Mounting Holes at 4 corners -->
-      <div class="absolute top-2.5 left-2.5 w-3 h-3 rounded-full bg-[#334155] border border-[#64748b]/50 shadow-inner"></div>
-      <div class="absolute top-2.5 right-2.5 w-3 h-3 rounded-full bg-[#334155] border border-[#64748b]/50 shadow-inner"></div>
-      <div class="absolute bottom-2.5 left-2.5 w-3 h-3 rounded-full bg-[#334155] border border-[#64748b]/50 shadow-inner"></div>
-      <div class="absolute bottom-2.5 right-2.5 w-3 h-3 rounded-full bg-[#334155] border border-[#64748b]/50 shadow-inner"></div>
-
-      <!-- Header Silkscreen Label on PCB -->
-      <div class="flex items-center justify-between text-[10px] text-[#64748b] font-mono tracking-widest uppercase mb-2 px-1">
-        <span>1602A QAPASS · PCF8574T</span>
-        <span class="text-[#38bdf8] font-bold flex items-center gap-1">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-ping"></span>
-          HD44780 CONTROLLER
-        </span>
+    <!-- Center/Right: Clean, Modern 16x2 Display Card -->
+    <div class="w-full max-w-2xl bg-surface-container-lowest rounded-3xl p-5 sm:p-7 shadow-xl border border-surface-container-high/60 space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-surface-container-high/40">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+          <span class="text-xs sm:text-sm font-bold text-on-surface uppercase tracking-wider">Live Handlebar Display Screen</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="connectWebSerial()" class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary text-xs font-bold hover:bg-primary-container transition-all flex items-center gap-1.5 shadow-sm cursor-pointer" id="btn-web-serial">
+            <span class="material-symbols-outlined text-[16px]">usb</span>
+            <span id="web-serial-btn-text">Connect USB (Live)</span>
+          </button>
+        </div>
       </div>
 
-      <!-- Glowing LCD Screen Inner Bezel -->
-      <div id="lcd-screen-bezel" class="rounded-xl p-4 sm:p-5 bg-gradient-to-b from-[#00286b] to-[#001744] border-2 border-[#00388c] shadow-[inset_0_2px_12px_rgba(0,0,0,0.8),0_0_20px_rgba(0,149,255,0.25)] relative overflow-hidden transition-all duration-300">
-        <!-- Dot-matrix pixel grid overlay effect -->
-        <div class="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:6px_6px] pointer-events-none opacity-40"></div>
-
-        <!-- 16x2 Character Grid -->
-        <div class="flex flex-col gap-2 font-mono text-base sm:text-2xl font-bold tracking-[0.16em] sm:tracking-[0.24em] select-none uppercase transition-colors duration-300" id="lcd-text-container" style="color: #e0f7ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 149, 255, 0.4);">
-          <!-- Line 1: 16 Chars -->
+      <!-- High Contrast LCD Screen Bezel -->
+      <div id="lcd-screen-bezel" class="rounded-2xl p-5 sm:p-6 bg-[#001f4d] border-2 border-[#004ac6] shadow-[inset_0_2px_12px_rgba(0,0,0,0.6)] relative overflow-hidden transition-all duration-300">
+        <!-- 16x2 Character Text -->
+        <div class="flex flex-col gap-2 font-mono text-xl sm:text-3xl font-extrabold tracking-[0.2em] select-none uppercase transition-colors duration-300" id="lcd-text-container" style="color: #60a5fa; text-shadow: 0 0 14px rgba(96, 165, 250, 0.6);">
           <div class="flex items-center justify-between overflow-hidden whitespace-pre">
-            <span id="virtual-lcd-line1">HELMET: SAFE OK </span>
-            <span class="text-[10px] font-sans text-white/40 tracking-normal uppercase">L1</span>
+            <span id="virtual-lcd-line1">SMART HELMET SYS</span>
+            <span class="text-[11px] font-sans text-white/40 tracking-normal">ROW 1</span>
           </div>
-          <!-- Line 2: 16 Chars -->
           <div class="flex items-center justify-between overflow-hidden whitespace-pre">
-            <span id="virtual-lcd-line2">ENGINE: STARTED </span>
-            <span class="text-[10px] font-sans text-white/40 tracking-normal uppercase">L2</span>
+            <span id="virtual-lcd-line2">RECEIVER READY..</span>
+            <span class="text-[11px] font-sans text-white/40 tracking-normal">ROW 2</span>
           </div>
         </div>
       </div>
 
-      <!-- Footer PCB Status Indicators -->
-      <div class="flex items-center justify-between text-[11px] font-mono text-[#94a3b8] mt-3 px-1">
-        <div class="flex items-center gap-3">
-          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> 5V VCC</span>
-          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span> SDA (A4)</span>
-          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> SCL (A5)</span>
-        </div>
-        <span class="text-[10px] text-[#64748b]">16 COLUMNS × 2 ROWS</span>
+      <!-- Quick status indicator bar -->
+      <div class="flex items-center justify-between text-xs text-outline pt-1">
+        <span id="web-serial-status">Status: Standby / Ready to connect</span>
+        <span class="font-mono text-[11px]">16 Columns × 2 Rows</span>
       </div>
     </div>
   </div>
@@ -1633,6 +1622,64 @@ animate();
       origToggle.addEventListener('click', () => {
         socket.emit('toggle-engine');
       });
+    }
+  }
+
+  // Web Serial API (Direct connection from Chrome/Edge without any server needed)
+  let webSerialPort = null;
+  async function connectWebSerial() {
+    if (!navigator.serial) {
+      alert("Direct USB Connection requires Chrome, Edge, or Opera. Please open this page in Chrome or Edge!");
+      return;
+    }
+    try {
+      webSerialPort = await navigator.serial.requestPort();
+      await webSerialPort.open({ baudRate: 9600 });
+      
+      const btnText = document.getElementById('web-serial-btn-text');
+      const statusText = document.getElementById('web-serial-status');
+      if (btnText) btnText.textContent = "USB Connected";
+      if (statusText) {
+        statusText.textContent = "🟢 Live Hardware Connected (9600 Baud)";
+        statusText.className = "text-secondary font-bold text-xs";
+      }
+
+      const textDecoder = new TextDecoderStream();
+      webSerialPort.readable.pipeTo(textDecoder.writable);
+      const reader = textDecoder.readable.getReader();
+
+      let lineBuffer = '';
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        lineBuffer += value;
+        const lines = lineBuffer.split('\n');
+        lineBuffer = lines.pop();
+        for (const line of lines) {
+          handleIncomingSerial(line.trim());
+        }
+      }
+    } catch (err) {
+      console.warn("Web Serial:", err.message);
+      const statusText = document.getElementById('web-serial-status');
+      if (statusText) statusText.textContent = "USB Disconnected / Cancelled";
+    }
+  }
+
+  function handleIncomingSerial(line) {
+    if (!line) return;
+    if (line.includes('[SAFE]')) {
+      setSystemState('safe');
+      updateVirtualLCD("HELMET: SAFE OK ", "ENGINE: STARTED ");
+    } else if (line.includes('[ALCOHOL]')) {
+      setSystemState('alcohol');
+      updateVirtualLCD("ALCOHOL DETECTED", "ENGINE: LOCKED! ");
+    } else if (line.includes('[NO_HELMET]')) {
+      setSystemState('helmet-off');
+      updateVirtualLCD("WEAR HELMET &   ", "FASTEN STRAP!   ");
+    } else if (line.includes('[CRASH]') || line.includes('[ACCIDENT]')) {
+      triggerCrashModal();
+      updateVirtualLCD("CRASH DETECTED! ", "SOS DISPATCHING ");
     }
   }
 

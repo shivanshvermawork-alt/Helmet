@@ -4,7 +4,7 @@
         {
             "label": "Upload Arduino 1 (Transmitter / Helmet)",
             "type": "shell",
-            "command": "\"${env:USERPROFILE}\\.antigravity-ide\\extensions\\vsciot-vscode.vscode-arduino-0.7.1\\assets\\platform\\win32-x64\\arduino-cli\\arduino-cli.exe\" compile --upload -p COM5 --fqbn arduino:avr:uno \"${workspaceFolder}\\Blink\"",
+            "command": "\"${env:USERPROFILE}\\.antigravity-ide\\extensions\\vsciot-vscode.vscode-arduino-0.7.1\\assets\\platform\\win32-x64\\arduino-cli\\arduino-cli.exe\" compile --upload -p COM7 --fqbn arduino:avr:uno \"${workspaceFolder}\\Blink\"",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -18,9 +18,9 @@
             "problemMatcher": []
         },
         {
-            "label": "Monitor Arduino 1 (COM5 - Helmet Transmitter)",
+            "label": "Monitor Arduino 1 (COM7 - Helmet Transmitter)",
             "type": "shell",
-            "command": "powershell -ExecutionPolicy Bypass -File \"${workspaceFolder}\\monitor.ps1\" -portName COM5",
+            "command": "powershell -ExecutionPolicy Bypass -File \"${workspaceFolder}\\monitor.ps1\" -portName COM7",
             "presentation": {
                 "reveal": "always",
                 "panel": "new",

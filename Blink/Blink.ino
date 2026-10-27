@@ -13,8 +13,8 @@ const int RF_TX_PIN         = 12;   // RF Transmitter DATA      -> Arduino D12
 const int MQ3_ANALOG_PIN    = A0;   // MQ-3 Analog (AO)         -> Arduino A0
 // MPU-6050 Accelerometer: SDA -> A4, SCL -> A5, VCC -> 5V, GND -> GND
 
-// Alcohol threshold: Clean air is ~250. Exceeding 450 triggers ALCOHOL alert.
-const int ALCOHOL_THRESHOLD = 450;
+// Alcohol threshold: 650 (Sober limit set per user request)
+const int ALCOHOL_THRESHOLD = 650;
 
 // MPU-6050 I2C Address (default is 0x68)
 const int MPU_ADDR = 0x68;

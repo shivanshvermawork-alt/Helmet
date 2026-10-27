@@ -163,16 +163,23 @@ void setup() {
       displayStatus("SMART HELMET SYS", "RECEIVER READY..");
     } else {
       hasPhysicalLCD = false;
-      Serial.println(F("{\"status\":\"PHYSICAL_LCD_ABSENT_USING_DASHBOARD_DIGITAL_TWIN\"}"));
+      Serial.println(F("[LCD] Physical LCD not found at 0x27/0x3F (Using Dashboard Mirror)."));
     }
   }
 
   // 3. Initialize RadioHead 433MHz RF Receiver
   if (!rf_driver.init()) {
-    Serial.println(F("{\"error\":\"RadioHead RF init failed on Pin 11\"}"));
+    Serial.println(F("[RF] ERROR: RadioHead RF init failed on Pin 11!"));
   } else {
-    Serial.println(F("{\"status\":\"RF Receiver Ready on Pin 11 (2000 bps)\"}"));
+    Serial.println(F("[RF] Receiver Ready on Pin 11 (2000 bps)."));
   }
+
+  Serial.println(F("\n================================================================================"));
+  Serial.println(F("            AEGISHELM SMART HELMET SYSTEM - BIKE RECEIVER (COM4)                "));
+  Serial.println(F("================================================================================"));
+  Serial.println(F("PINS: RF RX->D11 | Relay->D8 | Green LED->D9 | Buzzer->D3 | LCD->A4/A5"));
+  Serial.println(F("LISTENING FOR 433MHz HELMET TRANSMISSIONS..."));
+  Serial.println(F("================================================================================"));
 }
 
 // ========================================================
@@ -292,6 +299,7 @@ void loop() {
   }
 
   // 3. Signal Timeout Check: If no packet received within 3 seconds
+  // 3. Signal Timeout Check: If no packet received within 3 seconds
   if (lastPacketTime > 0 && (millis() - lastPacketTime > SIGNAL_TIMEOUT_MS)) {
     if (lastState != "TIMEOUT") {
       lastState = "TIMEOUT";
@@ -299,12 +307,9 @@ void loop() {
       setEngine(false); // Kill engine if helmet goes out of range
       digitalWrite(BUZZER_PIN, LOW);
       displayStatus("SIGNAL LOST", "ENGINE STOPPED");
-      Serial.println("Warning: RF signal lost. Engine stopped.");
+      Serial.println(F("[RECEIVER] RF Signal Lost (>3s) -> Engine Stopped."));
     }
   }
 
-  // 4. Stream 10Hz JSON telemetry for Web Gateway & Cockpit
-  streamTelemetryJSON();
-
-  delay(10);
+  delay(20);
 }
