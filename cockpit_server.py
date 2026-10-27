@@ -17,11 +17,19 @@ clients = set()
 clients_lock = threading.Lock()
 pause_serial_until = 0
 
+import re
+
 current_telemetry = {
     "helmet": 0,
     "alcohol": 0,
     "drowsy": 0,
     "crash": 0,
+    "ax": 0.04,
+    "ay": -0.02,
+    "az": 0.99,
+    "gForce": 0.99,
+    "pitch": 2.1,
+    "roll": 0.8,
     "relay": 0,
     "speedKmh": 0,
     "lcd1": "SMART HELMET SYS",
@@ -52,6 +60,31 @@ def parse_serial_line(line):
 
     print(f"[SERIAL] {line}")
 
+    # 1. Parse JSON telemetry packet if received
+    if line.startswith('{') and line.endswith('}'):
+        try:
+            data = json.loads(line)
+            current_telemetry.update(data)
+            broadcast(current_telemetry)
+            return
+        except Exception:
+            pass
+
+    # 2. Extract MPU 3-Axis & Attitude values
+    has_mpu_update = False
+    mpu_match = re.search(r'MPU:\s*X:([^\s]+)\s*Y:([^\s]+)\s*Z:([^\s]+)\s*P:([^\s°]+)°?\s*R:([^\s°]+)°?\s*G:([^\s]+)', line)
+    if mpu_match:
+        try:
+            current_telemetry["ax"] = float(mpu_match.group(1))
+            current_telemetry["ay"] = float(mpu_match.group(2))
+            current_telemetry["az"] = float(mpu_match.group(3))
+            current_telemetry["pitch"] = float(mpu_match.group(4))
+            current_telemetry["roll"] = float(mpu_match.group(5))
+            current_telemetry["gForce"] = float(mpu_match.group(6))
+            has_mpu_update = True
+        except Exception:
+            pass
+
     if '[SAFE]' in line:
         current_telemetry.update({
             "helmet": 1,
@@ -63,6 +96,20 @@ def parse_serial_line(line):
             "lcd1": "HELMET: SAFE OK ",
             "lcd2": "ENGINE: STARTED ",
             "status": "SAFE"
+        })
+        broadcast(current_telemetry)
+
+    elif '[DROWSY]' in line:
+        current_telemetry.update({
+            "helmet": 1,
+            "alcohol": 0,
+            "drowsy": 1,
+            "crash": 0,
+            "relay": 1,
+            "speedKmh": 20,
+            "lcd1": "DROWSINESS ALERT",
+            "lcd2": "TAKE A BREAK!   ",
+            "status": "DROWSY"
         })
         broadcast(current_telemetry)
 
@@ -116,6 +163,8 @@ def parse_serial_line(line):
             "lcd2": "ENGINE STOPPED  ",
             "status": "TIMEOUT"
         })
+        broadcast(current_telemetry)
+    elif has_mpu_update:
         broadcast(current_telemetry)
 
 def release_port_for_flash(seconds=35):

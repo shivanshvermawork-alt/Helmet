@@ -201,19 +201,49 @@ void loop() {
     String message = String((char*)buf);
     message.trim();
 
+    // 1. Separate state and MPU motion payload if present (Format: STATE:ax,ay,az,pitch,roll,gForce)
+    String stateStr = message;
+    int colonIdx = message.indexOf(':');
+    if (colonIdx > 0) {
+      stateStr = message.substring(0, colonIdx);
+      String mpuPayload = message.substring(colonIdx + 1);
+      float ax = 0.0, ay = 0.0, az = 0.0, p = 0.0, r = 0.0, g = 0.0;
+      int cnt = sscanf(mpuPayload.c_str(), "%f,%f,%f,%f,%f,%f", &ax, &ay, &az, &p, &r, &g);
+      if (cnt >= 5) {
+        ax_val = ax;
+        ay_val = ay;
+        az_val = az;
+        pitch_val = p;
+        roll_val = r;
+        if (cnt >= 6) gForce_val = g;
+      }
+    }
+
     // Human-readable debug output for Serial Monitor
     Serial.print(F("[BIKE RX] RF: ["));
-    Serial.print(message);
+    Serial.print(stateStr);
     Serial.print(F("] | Relay: "));
     Serial.print(engineRunning ? F("ON (RUNNING) ") : F("OFF (LOCKED) "));
     Serial.print(F("| LCD: \""));
     Serial.print(lcdLine1);
     Serial.print(F("\" / \""));
     Serial.print(lcdLine2);
-    Serial.println(F("\""));
+    Serial.print(F("\" | MPU: X:"));
+    Serial.print(ax_val, 2);
+    Serial.print(F(" Y:"));
+    Serial.print(ay_val, 2);
+    Serial.print(F(" Z:"));
+    Serial.print(az_val, 2);
+    Serial.print(F(" P:"));
+    Serial.print(pitch_val, 1);
+    Serial.print(F("° R:"));
+    Serial.print(roll_val, 1);
+    Serial.print(F("° G:"));
+    Serial.print(gForce_val, 2);
+    Serial.println();
 
     // 2. Handle System States
-    if (message == "SAFE") {
+    if (stateStr == "SAFE") {
       helmetState  = 1;
       alcoholState = 0;
       drowsyState  = 0;
@@ -226,9 +256,26 @@ void loop() {
         displayStatus("HELMET: SAFE OK", "ENGINE: STARTED");
       }
     } 
-    else if (message == "ALCOHOL") {
+    else if (stateStr == "DROWSY") {
+      helmetState  = 1;
+      alcoholState = 0;
+      drowsyState  = 1;
+      crashState   = 0;
+
+      if (lastState != "DROWSY") {
+        lastState = "DROWSY";
+        displayStatus("DROWSINESS ALERT", "TAKE A BREAK!   ");
+      }
+      digitalWrite(BUZZER_PIN, HIGH);
+      delay(100);
+      digitalWrite(BUZZER_PIN, LOW);
+      delay(60);
+    }
+    else if (stateStr == "ALCOHOL") {
       helmetState  = 1;
       alcoholState = 1;
+      drowsyState  = 0;
+      crashState   = 0;
 
       if (lastState != "ALCOHOL") {
         lastState = "ALCOHOL";
@@ -241,9 +288,11 @@ void loop() {
       digitalWrite(BUZZER_PIN, LOW);
       delay(60);
     } 
-    else if (message == "NO_HELMET") {
+    else if (stateStr == "NO_HELMET") {
       helmetState  = 0;
       alcoholState = 0;
+      drowsyState  = 0;
+      crashState   = 0;
 
       if (lastState != "NO_HELMET") {
         lastState = "NO_HELMET";
@@ -252,48 +301,13 @@ void loop() {
         displayStatus("WEAR HELMET &", "FASTEN STRAP!");
       }
     }
-    else if (message == "CRASH" || message == "ACCIDENT") {
+    else if (stateStr == "CRASH" || stateStr == "ACCIDENT") {
       crashState = 1;
-      gForce_val = 4.35;
-      pitch_val  = 64.0;
-      roll_val   = -52.0;
-
       if (lastState != "CRASH") {
         lastState = "CRASH";
         setEngine(false); // Kill engine immediately on impact
         digitalWrite(BUZZER_PIN, HIGH);
         displayStatus("CRASH DETECTED! ", "SOS DISPATCHING ");
-      }
-    }
-    // Extended packet handling with MPU-6050 (Format: H:1,A:0,D:0,C:0...)
-    else if (message.startsWith("H:")) {
-      int h = 0, a = 0, d = 0, c = 0;
-      sscanf(message.c_str(), "H:%d,A:%d,D:%d,C:%d", &h, &a, &d, &c);
-      helmetState  = h;
-      alcoholState = a;
-      drowsyState  = d;
-      crashState   = c;
-
-      if (helmetState == 1 && alcoholState == 0 && crashState == 0) {
-        if (lastState != "SAFE") {
-          lastState = "SAFE";
-          setEngine(true);
-          digitalWrite(BUZZER_PIN, LOW);
-          displayStatus("HELMET: SAFE OK", "ENGINE: STARTED");
-        }
-      } else if (alcoholState == 1) {
-        if (lastState != "ALCOHOL") {
-          lastState = "ALCOHOL";
-          setEngine(false);
-          displayStatus("ALCOHOL DETECTED", "ENGINE: LOCKED!");
-        }
-        digitalWrite(BUZZER_PIN, HIGH);
-      } else if (helmetState == 0) {
-        if (lastState != "NO_HELMET") {
-          lastState = "NO_HELMET";
-          setEngine(false);
-          displayStatus("WEAR HELMET &", "FASTEN STRAP!");
-        }
       }
     }
   }

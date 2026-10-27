@@ -1663,6 +1663,8 @@ animate();
 
           if (data.status === 'SAFE') {
             setSystemState('safe');
+          } else if (data.status === 'DROWSY' || data.drowsy === 1) {
+            setSystemState('drowsy');
           } else if (data.status === 'ALCOHOL') {
             setSystemState('alcohol');
           } else if (data.status === 'NO_HELMET') {
@@ -1673,6 +1675,53 @@ animate();
 
           if (data.lcd1 || data.lcd2) {
             updateVirtualLCD(data.lcd1, data.lcd2);
+          }
+
+          // Live MPU-6050 3-Axis & G-Force Updates in Designated UI Place
+          if (data.ax !== undefined && data.ax !== null) {
+            const ax = parseFloat(data.ax);
+            const el = document.getElementById('card-accel-x');
+            if (el) el.textContent = (ax >= 0 ? '+' : '') + ax.toFixed(2);
+          }
+          if (data.ay !== undefined && data.ay !== null) {
+            const ay = parseFloat(data.ay);
+            const el = document.getElementById('card-accel-y');
+            if (el) el.textContent = (ay >= 0 ? '+' : '') + ay.toFixed(2);
+          }
+          if (data.az !== undefined && data.az !== null) {
+            const az = parseFloat(data.az);
+            const el = document.getElementById('card-accel-z');
+            if (el) el.textContent = (az >= 0 ? '+' : '') + az.toFixed(2);
+          }
+          if (data.gForce !== undefined && data.gForce !== null) {
+            const g = parseFloat(data.gForce);
+            const elMag = document.getElementById('card-accel-mag');
+            const elRibbon = document.getElementById('ribbon-g-val');
+            const barMag = document.getElementById('bar-accel-mag');
+            if (elMag) elMag.textContent = g.toFixed(2);
+            if (elRibbon) elRibbon.textContent = g.toFixed(2);
+            if (barMag) barMag.style.width = Math.min(100, Math.round(g * 25)) + '%';
+          }
+          if (data.pitch !== undefined && data.roll !== undefined) {
+            const p = parseFloat(data.pitch);
+            const r = parseFloat(data.roll);
+            const hp = document.getElementById('hud-pitch-val');
+            const hr = document.getElementById('hud-roll-val');
+            const sp = document.getElementById('slider-pitch-label');
+            const sr = document.getElementById('slider-roll-label');
+            const ip = document.getElementById('input-pitch');
+            const ir = document.getElementById('input-roll');
+            if (hp) hp.textContent = (p >= 0 ? '+' : '') + p.toFixed(1) + '°';
+            if (hr) hr.textContent = (r >= 0 ? '+' : '') + r.toFixed(1) + '°';
+            if (sp) sp.textContent = (p >= 0 ? '+' : '') + p.toFixed(1) + '°';
+            if (sr) sr.textContent = (r >= 0 ? '+' : '') + r.toFixed(1) + '°';
+            if (ip) ip.value = p;
+            if (ir) ir.value = r;
+
+            // Live 3D Attitude Manipulation Bus: tilts helmet model in real time
+            window.dispatchEvent(new CustomEvent('aegis-telemetry-update', {
+              detail: { pitch: p, roll: r }
+            }));
           }
 
           const statusText = document.getElementById('web-serial-status');
@@ -1762,6 +1811,9 @@ animate();
     if (line.includes('[SAFE]')) {
       setSystemState('safe');
       updateVirtualLCD("HELMET: SAFE OK ", "ENGINE: STARTED ");
+    } else if (line.includes('[DROWSY]')) {
+      setSystemState('drowsy');
+      updateVirtualLCD("DROWSINESS ALERT", "TAKE A BREAK!   ");
     } else if (line.includes('[ALCOHOL]')) {
       setSystemState('alcohol');
       updateVirtualLCD("ALCOHOL DETECTED", "ENGINE: LOCKED! ");
@@ -1771,6 +1823,25 @@ animate();
     } else if (line.includes('[CRASH]') || line.includes('[ACCIDENT]')) {
       triggerCrashModal();
       updateVirtualLCD("CRASH DETECTED! ", "SOS DISPATCHING ");
+    }
+
+    const mpuMatch = line.match(/MPU:\s*X:([^\s]+)\s*Y:([^\s]+)\s*Z:([^\s]+)\s*P:([^\s°]+)°?\s*R:([^\s°]+)°?\s*G:([^\s]+)/);
+    if (mpuMatch) {
+      const ax = parseFloat(mpuMatch[1]);
+      const ay = parseFloat(mpuMatch[2]);
+      const az = parseFloat(mpuMatch[3]);
+      const p = parseFloat(mpuMatch[4]);
+      const r = parseFloat(mpuMatch[5]);
+      const g = parseFloat(mpuMatch[6]);
+      const elX = document.getElementById('card-accel-x');
+      const elY = document.getElementById('card-accel-y');
+      const elZ = document.getElementById('card-accel-z');
+      const elMag = document.getElementById('card-accel-mag');
+      if (elX) elX.textContent = (ax >= 0 ? '+' : '') + ax.toFixed(2);
+      if (elY) elY.textContent = (ay >= 0 ? '+' : '') + ay.toFixed(2);
+      if (elZ) elZ.textContent = (az >= 0 ? '+' : '') + az.toFixed(2);
+      if (elMag) elMag.textContent = g.toFixed(2);
+      window.dispatchEvent(new CustomEvent('aegis-telemetry-update', { detail: { pitch: p, roll: r } }));
     }
   }
 
