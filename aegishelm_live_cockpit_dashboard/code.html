@@ -1625,6 +1625,97 @@ animate();
     }
   }
 
+  // Automatic Localhost Gateway Connection (via Server-Sent Events)
+  function startSSEListener() {
+    const isHttp = window.location.protocol === 'http:' || window.location.protocol === 'https:';
+    const sseEndpoint = isHttp ? '/events' : 'http://localhost:8000/events';
+
+    console.log('[AegisHelm] Initializing SSE Gateway connection to:', sseEndpoint);
+
+    try {
+      const sse = new EventSource(sseEndpoint);
+
+      sse.onopen = () => {
+        console.log('[AegisHelm] Connected to Live Localhost Gateway!');
+        const statusText = document.getElementById('web-serial-status');
+        const hwText = document.getElementById('hardware-status-text');
+        const hwDot = document.getElementById('hardware-status-dot');
+        const hwPing = document.getElementById('hardware-status-ping');
+        const hwBadge = document.getElementById('hardware-status-badge');
+
+        if (statusText) {
+          statusText.textContent = "🟢 Live Localhost Gateway Linked (COM4)";
+          statusText.className = "text-secondary font-bold text-xs";
+        }
+        if (hwText) {
+          hwText.textContent = "LIVE LOCALHOST LINKED";
+          hwText.className = "font-label-sm text-xs font-bold text-secondary";
+        }
+        if (hwDot) hwDot.className = "relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary";
+        if (hwPing) hwPing.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75";
+        if (hwBadge) hwBadge.className = "hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full bg-secondary-fixed/30 border border-secondary/50 shadow-sm transition-all cursor-pointer group hover:bg-secondary-fixed/50";
+      };
+
+      sse.onmessage = (e) => {
+        try {
+          const data = JSON.parse(e.data);
+          console.log('[AegisHelm] Telemetry update:', data);
+
+          if (data.status === 'SAFE') {
+            setSystemState('safe');
+          } else if (data.status === 'ALCOHOL') {
+            setSystemState('alcohol');
+          } else if (data.status === 'NO_HELMET') {
+            setSystemState('helmet-off');
+          } else if (data.status === 'CRASH') {
+            triggerCrashModal();
+          }
+
+          if (data.lcd1 || data.lcd2) {
+            updateVirtualLCD(data.lcd1, data.lcd2);
+          }
+
+          const statusText = document.getElementById('web-serial-status');
+          if (statusText) {
+            statusText.textContent = "🟢 Live Gateway Linked · Status: " + (data.status || 'Active');
+            statusText.className = "text-secondary font-bold text-xs";
+          }
+        } catch (err) {
+          console.warn('[AegisHelm] Parse error:', err);
+        }
+      };
+
+      sse.onerror = (err) => {
+        console.warn('[AegisHelm] SSE connection lost or waiting for server. Reconnecting...', err);
+        const statusText = document.getElementById('web-serial-status');
+        if (statusText) {
+          statusText.textContent = "⚠️ Reconnecting to http://localhost:8000...";
+          statusText.className = "text-amber-500 font-bold text-xs";
+        }
+      };
+    } catch (err) {
+      console.warn('[AegisHelm] EventSource initialization failed:', err);
+    }
+  }
+
+  // Auto-launch SSE Gateway connection
+  startSSEListener();
+
+  // If viewing via file://, add a banner to open localhost:8000
+  if (window.location.protocol === 'file:') {
+    window.addEventListener('DOMContentLoaded', () => {
+      const banner = document.createElement('div');
+      banner.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-primary-container text-on-primary-container px-6 py-3 rounded-full shadow-2xl flex items-center gap-4 text-sm font-bold border border-primary/30';
+      banner.innerHTML = `
+        <span class="material-symbols-outlined text-primary text-[20px]">lan</span>
+        <span>Localhost Server is Active! Shift to localhost:</span>
+        <a href="http://localhost:8000" class="px-4 py-1.5 bg-primary text-on-primary rounded-full hover:bg-primary/90 text-xs uppercase tracking-wider transition-all">Go to http://localhost:8000</a>
+        <button onclick="this.parentElement.remove()" class="text-xs opacity-70 hover:opacity-100">✕</button>
+      `;
+      document.body.appendChild(banner);
+    });
+  }
+
   // Web Serial API (Direct connection from Chrome/Edge without any server needed)
   let webSerialPort = null;
   async function connectWebSerial() {
