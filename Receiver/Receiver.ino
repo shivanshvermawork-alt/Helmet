@@ -87,26 +87,26 @@ void streamTelemetryJSON() {
   if (millis() - lastTelemetryStream < 100) return;
   lastTelemetryStream = millis();
 
-  Serial.print("{\"helmet\":");
+  Serial.print(F("{\"helmet\":"));
   Serial.print(helmetState);
-  Serial.print(",\"alcohol\":");
+  Serial.print(F(",\"alcohol\":"));
   Serial.print(alcoholState);
-  Serial.print(",\"drowsy\":");
+  Serial.print(F(",\"drowsy\":"));
   Serial.print(drowsyState);
-  Serial.print(",\"crash\":");
+  Serial.print(F(",\"crash\":"));
   Serial.print(crashState);
-  Serial.print(",\"ax\":"); Serial.print(ax_val, 2);
-  Serial.print(",\"ay\":"); Serial.print(ay_val, 2);
-  Serial.print(",\"az\":"); Serial.print(az_val, 2);
-  Serial.print(",\"gForce\":"); Serial.print(gForce_val, 2);
-  Serial.print(",\"pitch\":"); Serial.print(pitch_val, 1);
-  Serial.print(",\"roll\":"); Serial.print(roll_val, 1);
-  Serial.print(",\"relay\":"); Serial.print(engineRunning ? 1 : 0);
-  Serial.print(",\"override\":"); Serial.print(manualLockOverride ? 1 : 0);
-  Serial.print(",\"speedKmh\":"); Serial.print(engineRunning ? 42 : 0);
-  Serial.print(",\"lcd1\":\""); Serial.print(lcdLine1); Serial.print("\"");
-  Serial.print(",\"lcd2\":\""); Serial.print(lcdLine2); Serial.print("\"");
-  Serial.println("}");
+  Serial.print(F(",\"ax\":")); Serial.print(ax_val, 2);
+  Serial.print(F(",\"ay\":")); Serial.print(ay_val, 2);
+  Serial.print(F(",\"az\":")); Serial.print(az_val, 2);
+  Serial.print(F(",\"gForce\":")); Serial.print(gForce_val, 2);
+  Serial.print(F(",\"pitch\":")); Serial.print(pitch_val, 1);
+  Serial.print(F(",\"roll\":")); Serial.print(roll_val, 1);
+  Serial.print(F(",\"relay\":")); Serial.print(engineRunning ? 1 : 0);
+  Serial.print(F(",\"override\":")); Serial.print(manualLockOverride ? 1 : 0);
+  Serial.print(F(",\"speedKmh\":")); Serial.print(engineRunning ? 42 : 0);
+  Serial.print(F(",\"lcd1\":\"")); Serial.print(lcdLine1); Serial.print(F("\""));
+  Serial.print(F(",\"lcd2\":\"")); Serial.print(lcdLine2); Serial.print(F("\""));
+  Serial.println(F("}"));
 }
 
 // Listens for Remote Killswitch commands ("LOCK" / "UNLOCK") from Web Dashboard
@@ -118,14 +118,14 @@ void checkSerialCommands() {
       manualLockOverride = true;
       setEngine(false);
       displayStatus("REMOTE OVERRIDE", "IGNITION CUT!");
-      Serial.println("{\"status\":\"LOCKED_BY_REMOTE\"}");
+      Serial.println(F("{\"status\":\"LOCKED_BY_REMOTE\"}"));
     } else if (cmd == "UNLOCK") {
       manualLockOverride = false;
       if (lastState == "SAFE") {
         setEngine(true);
         displayStatus("HELMET: SAFE OK", "ENGINE: STARTED");
       }
-      Serial.println("{\"status\":\"UNLOCKED_BY_REMOTE\"}");
+      Serial.println(F("{\"status\":\"UNLOCKED_BY_REMOTE\"}"));
     }
   }
 }
@@ -163,15 +163,15 @@ void setup() {
       displayStatus("SMART HELMET SYS", "RECEIVER READY..");
     } else {
       hasPhysicalLCD = false;
-      Serial.println("{\"status\":\"PHYSICAL_LCD_ABSENT_USING_DASHBOARD_DIGITAL_TWIN\"}");
+      Serial.println(F("{\"status\":\"PHYSICAL_LCD_ABSENT_USING_DASHBOARD_DIGITAL_TWIN\"}"));
     }
   }
 
   // 3. Initialize RadioHead 433MHz RF Receiver
   if (!rf_driver.init()) {
-    Serial.println("{\"error\":\"RadioHead RF init failed on Pin 11\"}");
+    Serial.println(F("{\"error\":\"RadioHead RF init failed on Pin 11\"}"));
   } else {
-    Serial.println("{\"status\":\"RF Receiver Ready on Pin 11 (2000 bps)\"}");
+    Serial.println(F("{\"status\":\"RF Receiver Ready on Pin 11 (2000 bps)\"}"));
   }
 }
 
@@ -195,9 +195,9 @@ void loop() {
     message.trim();
 
     // Human-readable debug output for Serial Monitor
-    Serial.print("RF Packet Received: [");
+    Serial.print(F("RF Packet Received: ["));
     Serial.print(message);
-    Serial.println("]");
+    Serial.println(F("]"));
 
     // 2. Handle System States
     if (message == "SAFE") {
@@ -239,7 +239,7 @@ void loop() {
         displayStatus("WEAR HELMET &", "FASTEN STRAP!");
       }
     }
-    else if (message == "CRASH") {
+    else if (message == "CRASH" || message == "ACCIDENT") {
       crashState = 1;
       gForce_val = 4.35;
       pitch_val  = 64.0;
